@@ -57,6 +57,19 @@ vendor/bin/pest --filter=Markdown   # one file
 composer test:coverage              # with coverage, enforcing the minimum
 ```
 
+### Coverage
+
+The threshold is 78%, a few points below what the suite actually reaches, so it
+ratchets rather than tripping on a single new line.
+
+It will not go much higher, and that is deliberate. The uncovered lines are
+almost entirely the response code — `header()` then `echo` then `exit` — in the
+three endpoint classes and the settings screen. `exit` cannot be intercepted, so
+a unit test that reached those lines would end the test run. They are covered
+instead by `tests/e2e/verify.sh`, which asserts the actual status codes,
+headers and bodies over HTTP. Chasing the number by injecting a mockable
+responder would buy a bigger percentage and no extra confidence.
+
 The unit suite runs **without a WordPress installation**. Brain Monkey replaces
 the core functions; `tests/Fixtures/wp-classes.php` provides minimal doubles for
 the few core classes the plugin type-hints against. That keeps the suite fast

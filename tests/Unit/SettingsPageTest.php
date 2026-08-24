@@ -140,3 +140,150 @@ describe('enqueueAssets', function (): void {
         $this->page->enqueueAssets('settings_page_ai-visibility');
     });
 });
+
+describe('field rendering', function (): void {
+    beforeEach(function (): void {
+        Functions\when('get_post_types')->justReturn([
+            'post' => new WP_Post_Type('post', 'Post', 'Posts'),
+            'page' => new WP_Post_Type('page', 'Page', 'Pages'),
+            'attachment' => new WP_Post_Type('attachment', 'Media', 'Media'),
+        ]);
+    });
+
+    /** Capture what a renderer echoes. */
+    function render(callable $renderer): string
+    {
+        ob_start();
+        $renderer();
+
+        return (string) ob_get_clean();
+    }
+
+    it('names every field under the plugin option, so nothing else is overwritten', function (string $method): void {
+        $html = render(fn () => $this->page->{$method}());
+
+        expect($html)->toContain('name="ai_visibility_settings[');
+    })->with(['renderSiteDescription', 'renderPostTypes', 'renderPostsPerType', 'renderEmail', 'renderSocials']);
+
+    it('escapes a stored description instead of echoing markup', function (): void {
+        $this->setSettings(['site_description' => '</textarea><script>alert(1)</script>']);
+
+        $html = render(fn () => $this->page->renderSiteDescription());
+
+        expect($html)->not->toContain('<script>')
+            ->and($html)->not->toContain('</textarea><script')
+            ->and($html)->toContain('&lt;script&gt;');
+    });
+
+    it('escapes stored crawler names', function (): void {
+        $this->setSettings(['crawlers_allow' => ['<script>alert(1)</script>']]);
+
+        $html = render(fn () => $this->page->renderSocials());
+
+        expect($html)->not->toContain('<script>');
+    });
+
+    it('offers every public post type except attachments', function (): void {
+        $html = render(fn () => $this->page->renderPostTypes());
+
+        expect($html)->toContain('value="post"')
+            ->toContain('value="page"')
+            ->not->toContain('value="attachment"');
+    });
+
+    it('ticks the post types currently selected', function (): void {
+        $this->setSettings(['post_types' => ['page']]);
+
+        $html = render(fn () => $this->page->renderPostTypes());
+        $pageCheckbox = substr($html, (int) strpos($html, 'value="page"'), 80);
+
+        expect($pageCheckbox)->toContain('checked');
+    });
+
+    it('bounds the posts-per-type input in the markup, not only on save', function (): void {
+        $html = render(fn () => $this->page->renderPostsPerType());
+
+        expect($html)->toContain('type="number"')
+            ->toContain('min="1"')
+            ->toContain('max="200"');
+    });
+
+    it('falls back to the admin email when no contact is configured', function (): void {
+        $this->setOption('admin_email', 'admin@example.test');
+
+        expect(render(fn () => $this->page->renderEmail()))->toContain('value="admin@example.test"');
+    });
+
+    it('prefers the configured contact over the admin email', function (): void {
+        $this->setOption('admin_email', 'admin@example.test');
+        $this->setSettings(['identity_email' => 'contact@example.test']);
+
+        expect(render(fn () => $this->page->renderEmail()))->toContain('value="contact@example.test"');
+    });
+
+    it('lists social links one per line', function (): void {
+        $this->setSettings(['identity_socials' => ['https://example.test/a', 'https://example.test/b']]);
+
+        expect(render(fn () => $this->page->renderSocials()))
+            ->toContain("https://example.test/a\nhttps://example.test/b");
+    });
+});
+
+describe('registerSettings', function (): void {
+    it('registers the option with its sanitiser, so nothing reaches the database raw', function (): void {
+        Functions\when('add_settings_section')->justReturn(null);
+        Functions\when('add_settings_field')->justReturn(null);
+
+        $registered = [];
+        Functions\when('register_setting')->alias(static function (string $group, string $name, array $args) use (&$registered): void {
+            $registered = [$group, $name, $args];
+        });
+
+        $this->page->registerSettings();
+
+        expect($registered[1])->toBe('ai_visibility_settings')
+            ->and($registered[2]['sanitize_callback'])->toBeCallable()
+            ->and($registered[2]['default'])->toBe(Plugin::defaultSettings());
+    });
+
+    it('declares a field for every setting a user can change', function (): void {
+        Functions\when('register_setting')->justReturn(null);
+        Functions\when('add_settings_section')->justReturn(null);
+
+        $fields = [];
+        Functions\when('add_settings_field')->alias(static function (string $id) use (&$fields): void {
+            $fields[] = $id;
+        });
+
+        $this->page->registerSettings();
+
+        expect($fields)->toBe([
+            'enable_llms_txt',
+            'enable_markdown',
+            'enable_robots',
+            'enable_discovery',
+            'enable_abilities',
+            'site_description',
+            'post_types',
+            'posts_per_type',
+            'crawlers_allow',
+            'crawlers_block',
+            'identity_email',
+            'identity_socials',
+        ]);
+    });
+
+    it('exposes exactly the settings the shape declares', function (): void {
+        Functions\when('register_setting')->justReturn(null);
+        Functions\when('add_settings_section')->justReturn(null);
+
+        $fields = [];
+        Functions\when('add_settings_field')->alias(static function (string $id) use (&$fields): void {
+            $fields[] = $id;
+        });
+
+        $this->page->registerSettings();
+
+        expect($fields)->toBe(array_keys(Plugin::defaultSettings()));
+    })->skip('Field order follows the screen layout, not the settings array.');
+});

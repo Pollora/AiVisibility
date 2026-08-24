@@ -78,6 +78,11 @@ jobs:
           composer install --no-dev --no-interaction --no-progress \
             --optimize-autoloader --classmap-authoritative
 
+          # composer.lock is export-ignored, so the install above writes a fresh
+          # one into the build. The plugin has no runtime dependencies, which
+          # makes that file pure noise in an installed plugin directory.
+          rm -f composer.lock
+
       - name: Refuse to ship a development file
         run: |
           cd build/ai-visibility

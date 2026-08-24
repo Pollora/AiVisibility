@@ -1,0 +1,146 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to build (e.g. v1.1.0)'
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # A tag must never be published without the full gate having passed on exactly
+  # the code being tagged.
+  # ---------------------------------------------------------------------------
+  verify:
+    name: Verify the tagged tree
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer:v2
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v3
+
+      - name: Quality gate
+        run: composer run qa
+
+      - name: The tag must match the version in the plugin header
+        run: |
+          tag="${{ github.event.inputs.tag || github.ref_name }}"
+          header=$(grep -m1 '^ \* Version:' ai-visibility.php | sed 's/.*Version: *//')
+
+          if [[ "$tag" != "v${header}" ]]; then
+            echo "::error::tag ${tag} does not match the plugin header version ${header}"
+            exit 1
+          fi
+
+          echo "Tag ${tag} matches the plugin header."
+
+  build:
+    name: Build the distributable zip
+    runs-on: ubuntu-latest
+    needs: verify
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer:v2
+
+      - name: Export the shippable tree
+        # git archive honours the export-ignore attributes in .gitattributes, so
+        # tests, tool configuration and CI cannot end up in a user's plugins
+        # directory. Anything that must ship has to be tracked and not ignored.
+        run: |
+          mkdir -p build
+          git archive --format=tar --prefix=ai-visibility/ HEAD | tar -x -C build
+
+      - name: Install runtime dependencies into the export
+        working-directory: build/ai-visibility
+        run: |
+          composer install --no-dev --no-interaction --no-progress \
+            --optimize-autoloader --classmap-authoritative
+
+      - name: Refuse to ship a development file
+        run: |
+          cd build/ai-visibility
+          failed=0
+          for forbidden in tests phpunit.xml.dist phpstan.neon.dist phpcs.xml.dist pint.json .github .git composer.lock; do
+            if [[ -e "$forbidden" ]]; then
+              echo "::error::${forbidden} is present in the build"
+              failed=1
+            fi
+          done
+
+          for required in ai-visibility.php uninstall.php README.md LICENSE src cli assets vendor/autoload.php; do
+            if [[ ! -e "$required" ]]; then
+              echo "::error::${required} is missing from the build"
+              failed=1
+            fi
+          done
+
+          exit $failed
+
+      - name: Confirm the build parses on the minimum PHP version
+        working-directory: build/ai-visibility
+        run: find . -name '*.php' -print0 | xargs -0 -n1 -P4 php -l > /dev/null
+
+      - name: Create the zip
+        run: |
+          cd build
+          zip -rq "../ai-visibility-${{ github.event.inputs.tag || github.ref_name }}.zip" ai-visibility
+          cd ..
+          unzip -l "ai-visibility-${{ github.event.inputs.tag || github.ref_name }}.zip" | tail -5
+
+      - name: Upload the artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-visibility-zip
+          path: ai-visibility-*.zip
+          retention-days: 30
+
+      - name: Extract this version's changelog entry
+        id: notes
+        run: |
+          version="${{ github.event.inputs.tag || github.ref_name }}"
+          version="${version#v}"
+
+          # Everything between this version's heading and the next one.
+          awk -v v="## ${version}" '
+            $0 == v { capture = 1; next }
+            capture && /^## / { exit }
+            capture { print }
+          ' CHANGELOG.md > release-notes.md
+
+          if [[ ! -s release-notes.md ]]; then
+            echo "::warning::no CHANGELOG entry found for ${version}"
+            echo "See CHANGELOG.md." > release-notes.md
+          fi
+
+          cat release-notes.md
+
+      - name: Publish the release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ai-visibility-*.zip
+          body_path: release-notes.md
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          fail_on_unmatched_files: true

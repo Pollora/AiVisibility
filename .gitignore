@@ -1,0 +1,14 @@
+/vendor/
+/node_modules/
+/build/
+/.phpunit.cache/
+/.phpunit.result.cache
+.phpcs.cache
+/coverage/
+.DS_Store
+*.log
+
+# Local tool overrides — the .dist files are the committed source of truth.
+/phpunit.xml
+/phpstan.neon
+/phpcs.xml

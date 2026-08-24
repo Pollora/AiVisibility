@@ -1,0 +1,102 @@
+{
+    "name": "pollora/ai-visibility",
+    "description": "Maximize WordPress site visibility for AI engines (LLMs, AI search, AI agents)",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "keywords": [
+        "wordpress",
+        "wordpress-plugin",
+        "llms-txt",
+        "ai",
+        "llm",
+        "seo",
+        "mcp",
+        "markdown"
+    ],
+    "homepage": "https://github.com/Pollora/AiVisibility",
+    "support": {
+        "issues": "https://github.com/Pollora/AiVisibility/issues",
+        "source": "https://github.com/Pollora/AiVisibility"
+    },
+    "authors": [
+        {
+            "name": "Pollora",
+            "homepage": "https://pollora.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.3"
+    },
+    "require-dev": {
+        "brain/monkey": "^2.6",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "laravel/pint": "^1.18",
+        "mockery/mockery": "^1.6",
+        "pestphp/pest": "^3.7",
+        "php-parallel-lint/php-parallel-lint": "^1.4",
+        "php-stubs/wp-cli-stubs": "^2.11",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "roave/security-advisories": "dev-latest",
+        "squizlabs/php_codesniffer": "^3.11",
+        "szepeviktor/phpstan-wordpress": "^2.0",
+        "wp-coding-standards/wpcs": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pollora\\AiVisibility\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pollora\\AiVisibility\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "platform": {
+            "php": "8.3.0"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "lint": "parallel-lint --colors --exclude vendor --exclude node_modules .",
+        "format": "pint",
+        "format:check": "pint --test",
+        "analyse": "phpstan analyse --memory-limit=512M",
+        "sniff": "phpcs",
+        "sniff:fix": "phpcbf",
+        "test": "pest",
+        "test:coverage": "pest --coverage --min=80",
+        "audit:deps": "@composer audit --locked --abandoned=report",
+        "qa": [
+            "@lint",
+            "@format:check",
+            "@sniff",
+            "@analyse",
+            "@test"
+        ]
+    },
+    "scripts-descriptions": {
+        "lint": "Check every PHP file for syntax errors",
+        "format": "Apply Laravel Pint code style fixes",
+        "format:check": "Verify code style without writing",
+        "analyse": "Run PHPStan static analysis",
+        "sniff": "Run PHPCS (WordPress security, i18n, PHP compatibility)",
+        "test": "Run the Pest test suite",
+        "test:coverage": "Run tests with coverage and enforce the minimum threshold",
+        "qa": "Run the whole quality gate as CI does"
+    },
+    "extra": {
+        "installer-name": "ai-visibility"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

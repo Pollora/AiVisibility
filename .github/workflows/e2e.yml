@@ -1,0 +1,165 @@
+name: End-to-end
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  wordpress:
+    name: WP ${{ matrix.wordpress }} / PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    # A nightly WordPress breaking is news about WordPress, not about this
+    # plugin; it must not turn the whole check red.
+    continue-on-error: ${{ matrix.experimental == true }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # The oldest WordPress the plugin header claims to support.
+          - wordpress: '6.7'
+            php: '8.3'
+          - wordpress: 'latest'
+            php: '8.3'
+          - wordpress: 'latest'
+            php: '8.4'
+          # Catches a core change before it reaches a release.
+          - wordpress: 'nightly'
+            php: '8.4'
+            experimental: true
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+
+    env:
+      WP_DIR: ${{ github.workspace }}/wordpress
+      WP_URL: http://127.0.0.1:8080
+
+    steps:
+      - name: Check out the plugin
+        uses: actions/checkout@v4
+        with:
+          path: plugin
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mysqli, zip, gd
+          coverage: none
+          tools: composer:v2, wp-cli
+
+      - name: Install runtime dependencies only
+        working-directory: plugin
+        run: composer install --no-dev --no-interaction --no-progress --optimize-autoloader
+
+      - name: Download WordPress
+        run: |
+          mkdir -p "$WP_DIR"
+          wp core download --version=${{ matrix.wordpress }} --path="$WP_DIR"
+
+      - name: Configure and install WordPress
+        run: |
+          wp config create \
+            --path="$WP_DIR" \
+            --dbname=wordpress --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 \
+            --extra-php <<'PHP'
+          define( 'WP_DEBUG', true );
+          define( 'WP_DEBUG_LOG', true );
+          // Display would corrupt every endpoint body; the log is asserted on instead.
+          define( 'WP_DEBUG_DISPLAY', false );
+          define( 'DISALLOW_FILE_MODS', false );
+          PHP
+
+          wp core install \
+            --path="$WP_DIR" \
+            --url="$WP_URL" \
+            --title='AI Visibility E2E' \
+            --admin_user=admin \
+            --admin_password=password \
+            --admin_email=e2e@example.test \
+            --skip-email
+
+          wp rewrite structure '/%postname%/' --path="$WP_DIR"
+
+      - name: Install the plugin
+        run: |
+          cp -R plugin "$WP_DIR/wp-content/plugins/ai-visibility"
+          rm -rf "$WP_DIR/wp-content/plugins/ai-visibility/.git"
+          wp plugin activate ai-visibility --path="$WP_DIR"
+          wp rewrite flush --path="$WP_DIR"
+
+      - name: Confirm the plugin loaded without notices
+        run: |
+          wp plugin list --path="$WP_DIR" --status=active --format=table
+          wp option get ai_visibility_settings --path="$WP_DIR" --format=json
+
+      - name: Start the server
+        run: |
+          wp server --host=127.0.0.1 --port=8080 --path="$WP_DIR" > "$RUNNER_TEMP/server.log" 2>&1 &
+          for _ in $(seq 1 30); do
+            if curl -sf -o /dev/null "$WP_URL"; then
+              echo 'Server is up.'
+              exit 0
+            fi
+            sleep 1
+          done
+          echo 'Server never became ready.'
+          cat "$RUNNER_TEMP/server.log"
+          exit 1
+
+      - name: Verify the endpoints
+        run: bash plugin/tests/e2e/verify.sh "$WP_URL" wp --path="$WP_DIR"
+
+      - name: Fail on any PHP notice, warning or deprecation
+        run: |
+          log="$WP_DIR/wp-content/debug.log"
+          if [[ -s "$log" ]]; then
+            echo '::error::WordPress logged PHP diagnostics while the plugin was active'
+            cat "$log"
+            exit 1
+          fi
+          echo 'debug.log is empty.'
+
+      - name: Uninstall cleanly
+        run: |
+          wp plugin deactivate ai-visibility --path="$WP_DIR"
+          wp plugin uninstall ai-visibility --path="$WP_DIR"
+
+          for option in ai_visibility_settings ai_visibility_last_generated ai_visibility_flush_rewrite; do
+            if wp option get "$option" --path="$WP_DIR" > /dev/null 2>&1; then
+              echo "::error::$option survived uninstall"
+              exit 1
+            fi
+          done
+
+          if wp cron event list --path="$WP_DIR" --fields=hook --format=csv | grep -q ai_visibility; then
+            echo '::error::a scheduled event survived uninstall'
+            exit 1
+          fi
+
+          echo 'Uninstall left nothing behind.'
+
+      - name: Server log
+        if: failure()
+        run: cat "$RUNNER_TEMP/server.log" || true

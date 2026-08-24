@@ -1,0 +1,25 @@
+parameters:
+    level: max
+    phpVersion:
+        min: 80300
+        max: 80400
+
+    paths:
+        - ai-visibility.php
+        - uninstall.php
+        - src
+        - cli
+
+    # Pest describes tests as closures rebound onto a generated TestCase, so
+    # every `$this->` in a test resolves to PHPUnit\Framework\TestCase and
+    # reports as an undefined property. Analysing them would mean either a
+    # baseline of hundreds of false positives or writing the suite in a style
+    # that fights the framework. The suite proves itself by running.
+
+    scanFiles:
+        - vendor/php-stubs/wp-cli-stubs/wp-cli-stubs.php
+        - vendor/php-stubs/wp-cli-stubs/wp-cli-commands-stubs.php
+        - vendor/php-stubs/wp-cli-stubs/wp-cli-i18n-stubs.php
+
+    treatPhpDocTypesAsCertain: false
+    reportUnmatchedIgnoredErrors: true

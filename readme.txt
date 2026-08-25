@@ -84,6 +84,9 @@ WP-CLI is supported: `wp ai-visibility generate all`, `generate <file>`,
 `--dry-run`, and `wp ai-visibility status`. A failed write is an error with a
 non-zero exit code, not a silent no-op.
 
+Source, issues and the full hook reference with examples:
+[github.com/Pollora/AiVisibility](https://github.com/Pollora/AiVisibility).
+
 = Translations =
 
 The admin screen and every user-facing message are translatable, and the plugin
@@ -101,6 +104,8 @@ Developed and maintained by [AmphiBee](https://amphibee.fr).
 
 Pretty permalinks are required — `Settings → Permalinks`, anything but "Plain".
 With plain permalinks every endpoint returns a 404, and the dashboard says so.
+
+Composer users can instead run `composer require pollora/ai-visibility`.
 
 == Frequently Asked Questions ==
 

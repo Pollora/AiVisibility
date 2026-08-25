@@ -13,8 +13,7 @@ The latest minor release receives security fixes. Older ones do not.
 **Please do not open a public issue.**
 
 Use GitHub's private reporting — [Security → Report a
-vulnerability](https://github.com/Pollora/AiVisibility/security/advisories/new) —
-or email `security@pollora.com`.
+vulnerability](https://github.com/Pollora/AiVisibility/security/advisories/new).
 
 Useful in a report: the plugin version, the WordPress and PHP versions, what an
 attacker gains, and the smallest sequence of steps that demonstrates it.

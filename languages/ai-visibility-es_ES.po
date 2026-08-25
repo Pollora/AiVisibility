@@ -1,4 +1,4 @@
-# Copyright (C) 2026 Pollora
+# Copyright (C) 2026 AmphiBee
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
@@ -34,13 +34,13 @@ msgstr "Maximiza la visibilidad del sitio para los motores de IA: llms.txt, endp
 
 #. Author of the plugin
 #: ai-visibility.php
-msgid "Pollora"
-msgstr "Pollora"
+msgid "AmphiBee"
+msgstr "AmphiBee"
 
 #. Author URI of the plugin
 #: ai-visibility.php
-msgid "https://pollora.com"
-msgstr "https://pollora.com"
+msgid "https://amphibee.fr"
+msgstr "https://amphibee.fr"
 
 #: src/Abilities/Registration.php:22
 msgid "AI discoverability and visibility tools"

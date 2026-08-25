@@ -3,8 +3,8 @@
  * Plugin Name: AI Visibility
  * Description: Maximize site visibility for AI engines — llms.txt, Markdown endpoints, robots.txt AI directives, AI discovery files, and MCP abilities.
  * Version: 1.1.0
- * Author: Pollora
- * Author URI: https://pollora.com
+ * Author: AmphiBee
+ * Author URI: https://amphibee.fr
  * Requires PHP: 8.3
  * Requires at least: 6.7
  * License: GPL-2.0-or-later

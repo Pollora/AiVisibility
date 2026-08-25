@@ -9,6 +9,11 @@ declare(strict_types=1);
 
 namespace Pollora\AiVisibility\CLI;
 
+// Unlike the rest of the codebase, this file does something when it loads: it
+// registers the command at the bottom. Reached directly, that would run outside
+// WordPress.
+defined('ABSPATH') || exit;
+
 use Pollora\AiVisibility\Artifact;
 use Pollora\AiVisibility\Cache\Invalidation;
 use Pollora\AiVisibility\Plugin;

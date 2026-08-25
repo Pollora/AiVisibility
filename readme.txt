@@ -2,9 +2,9 @@
 Contributors: ogorzalka
 Tags: llms-txt, ai, markdown, seo, robots-txt
 Requires at least: 6.7
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -171,6 +171,11 @@ that keep a plugin like this one out of your error log.
 
 == Changelog ==
 
+= 1.3.1 =
+
+* Fixed: `Tested up to` named WordPress 7.0 when 7.1 had shipped, which keeps a plugin out of directory search results.
+* Fixed: the WP-CLI file now refuses direct access.
+
 = 1.3.0 =
 
 * Renamed to AmphiBee AI Visibility. The directory does not accept generic names, and three listed plugins already use "AI Visibility" — each behind a brand of its own.
@@ -204,6 +209,9 @@ that keep a plugin like this one out of your error log.
 * Description and noindex detection for The SEO Framework, Yoast SEO, Rank Math and SEOPress.
 
 == Upgrade Notice ==
+
+= 1.3.1 =
+Metadata and hardening only. Nothing to do after updating.
 
 = 1.3.0 =
 The plugin is renamed to AmphiBee AI Visibility and its text domain now matches

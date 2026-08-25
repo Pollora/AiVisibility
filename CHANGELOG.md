@@ -5,6 +5,17 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.3.1
+
+### Fixed
+
+- `Tested up to` named WordPress 7.0 when 7.1 had shipped. The directory hides
+  plugins that are not documented as tested against the current release, so this
+  alone would have kept it out of search results.
+- The WP-CLI file now refuses direct access. Every other file in the plugin only
+  declares a class, and is inert if reached over HTTP; this one registers its
+  command as it loads, so it needed the guard the others do not.
+
 ## 1.3.0
 
 ### Changed

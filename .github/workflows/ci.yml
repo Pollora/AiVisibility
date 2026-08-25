@@ -55,8 +55,20 @@ jobs:
             --exclude=vendor,tests,build,node_modules \
             --headers='{"Report-Msgid-Bugs-To":"https://github.com/Pollora/AiVisibility/issues","Last-Translator":"Pollora","Language-Team":"Pollora"}'
 
-          # POT-Creation-Date changes on every run and says nothing about drift.
-          strip() { grep -v '^"POT-Creation-Date:' "$1"; }
+          # What this check is for: catching a string that was added, changed or
+          # removed without the template following. Two kinds of line move on
+          # their own and say nothing about that.
+          #
+          #   POT-Creation-Date  changes on every run.
+          #   #: file.php:123    records where each string sits, so inserting a
+          #                      line anywhere shifts every reference below it.
+          #                      A commit that touches no string at all then
+          #                      fails the check.
+          #
+          # Dropping the references costs the guarantee that they point at the
+          # current line. Nothing reads them but a translator opening the file,
+          # and `wp i18n make-pot` refreshes them whenever it next runs.
+          strip() { grep -vE '^"POT-Creation-Date:|^#: ' "$1"; }
 
           if ! diff -u <(strip languages/ai-visibility.pot) <(strip /tmp/regenerated.pot); then
             echo '::error file=languages/ai-visibility.pot::out of date — run `wp i18n make-pot` and commit the result'

@@ -5,6 +5,28 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.2.0
+
+### Added
+
+- The plugin's mark now sits in the settings masthead, the same one the plugin
+  directory shows, so wp-admin and the listing carry one identity.
+- A `readme.txt`, which is what the WordPress.org directory reads to build a
+  plugin's page — `README.md` is not consulted there.
+
+### Changed
+
+- The plugin is attributed to AmphiBee. `Author URI` pointed at a domain that
+  does not resolve, and WordPress.org renders that field as a link on the
+  listing.
+
+### Fixed
+
+- The icon carried no `viewBox`, so it could not scale: at any size other than
+  its native 942px it rendered wrongly.
+- Vulnerability reports no longer point at an unreachable mailbox. GitHub's
+  private reporting, which works, is now the only channel named.
+
 ## 1.1.0
 
 ### Added

@@ -83,6 +83,20 @@ describe('version consistency', function (): void {
 
         expect($changelog)->toContain('## ' . $this->header['Version']);
     });
+
+    it('declares the same version as readme.txt Stable tag', function (): void {
+        // The directory serves whatever Stable tag names. Left behind, it keeps
+        // serving the previous release however new the tree in trunk is.
+        $readme = (string) file_get_contents($this->root . '/readme.txt');
+
+        expect($readme)->toContain('Stable tag: ' . $this->header['Version']);
+    });
+
+    it('requires the same WordPress version as readme.txt', function (): void {
+        $readme = (string) file_get_contents($this->root . '/readme.txt');
+
+        expect($readme)->toContain('Requires at least: ' . $this->header['Requires at least']);
+    });
 });
 
 describe('plugin constants', function () use ($root): void {

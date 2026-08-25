@@ -4,7 +4,7 @@ Tags: llms-txt, ai, markdown, seo, robots-txt
 Requires at least: 6.7
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -171,6 +171,13 @@ that keep a plugin like this one out of your error log.
 
 == Changelog ==
 
+= 1.2.0 =
+
+* The plugin's mark now sits in the settings masthead — the same one this listing shows, so wp-admin and the directory carry one identity.
+* The plugin is attributed to AmphiBee.
+* Fixed: the icon carried no viewBox and could not scale to any size but its native one.
+* Fixed: vulnerability reports pointed at an unreachable mailbox. GitHub's private reporting is now the only channel named.
+
 = 1.1.0 =
 
 * Rebuilt settings screen: five panels behind a sidebar — Dashboard, Discovery, Content, AI crawlers, Identity — in place of four stacked form tables. The panel is in the URL, so reloading, bookmarking and the post-save redirect all return to where you were.
@@ -192,6 +199,11 @@ that keep a plugin like this one out of your error log.
 * Description and noindex detection for The SEO Framework, Yoast SEO, Rank Math and SEOPress.
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Cosmetic and metadata only: the plugin's mark appears in the settings header,
+and authorship now points at AmphiBee. The generated files are untouched and no
+action is needed after updating.
 
 = 1.1.0 =
 Rebuilt settings screen with health checks that surface the five conditions

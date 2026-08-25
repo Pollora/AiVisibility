@@ -120,7 +120,12 @@ routing all follow. There should be no second list anywhere.
 2. Bump `Version:` in the `ai-visibility.php` header **and** the `VERSION`
    constant below it. `DistributionTest` fails if they disagree, or if either
    disagrees with the changelog.
-3. Regenerate the translation template — its `Project-Id-Version` header
+3. Bump `Stable tag:` in `readme.txt`, and add the entry to its own
+   `== Changelog ==` — the directory reads that file, not `CHANGELOG.md`, and it
+   serves whatever `Stable tag` names. Left behind, it keeps serving the
+   previous release however new the tree in trunk is. `DistributionTest` checks
+   it against the header, along with `Requires at least`.
+4. Regenerate the translation template — its `Project-Id-Version` header
    carries the plugin version, so a bump alone puts it out of date and CI's
    drift check fails on a tree that `composer qa` calls clean:
 
@@ -133,7 +138,7 @@ routing all follow. There should be no second list anywhere.
 
    The `.po` files are left alone: their `Project-Id-Version` records the
    version each translation was made against, and only a retranslation moves it.
-4. Tag `vX.Y.Z` and push it.
+5. Tag `vX.Y.Z` and push it.
 
 The release workflow re-runs the whole gate on the tagged tree, refuses to build
 if the tag does not match the plugin header, builds the zip from `git archive`

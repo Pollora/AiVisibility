@@ -10,9 +10,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-08-25T08:32:45+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2026-08-25 14:00+0000\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ai-visibility\n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
 
 #. Plugin Name of the plugin
 #: ai-visibility.php
@@ -21,372 +25,372 @@ msgstr ""
 #: src/Admin/SettingsPage.php:122
 #: src/Admin/SettingsPage.php:285
 msgid "AI Visibility"
-msgstr ""
+msgstr "AI Visibility"
 
 #. Description of the plugin
 #: ai-visibility.php
 msgid "Maximize site visibility for AI engines — llms.txt, Markdown endpoints, robots.txt AI directives, AI discovery files, and MCP abilities."
-msgstr ""
+msgstr "Maximaliseert de zichtbaarheid van de site voor AI-engines — llms.txt, Markdown-eindpunten, AI-richtlijnen in robots.txt, AI-discoverybestanden en MCP-mogelijkheden."
 
 #. Author of the plugin
 #: ai-visibility.php
 msgid "Pollora"
-msgstr ""
+msgstr "Pollora"
 
 #. Author URI of the plugin
 #: ai-visibility.php
 msgid "https://pollora.com"
-msgstr ""
+msgstr "https://pollora.com"
 
 #: src/Abilities/Registration.php:22
 msgid "AI discoverability and visibility tools"
-msgstr ""
+msgstr "Hulpmiddelen voor AI-vindbaarheid en -zichtbaarheid"
 
 #: src/Abilities/Registration.php:29
 msgid "Get llms.txt"
-msgstr ""
+msgstr "llms.txt ophalen"
 
 #: src/Abilities/Registration.php:30
 msgid "Returns the llms.txt content — a structured index of the site for LLMs"
-msgstr ""
+msgstr "Geeft de inhoud van llms.txt terug — een gestructureerde index van de site voor LLM's"
 
 #: src/Abilities/Registration.php:36
 msgid "Regenerate AI files"
-msgstr ""
+msgstr "AI-bestanden opnieuw genereren"
 
 #: src/Abilities/Registration.php:37
 msgid "Regenerates all AI visibility files (llms.txt, llms-full.txt, ai.txt, identity.json)"
-msgstr ""
+msgstr "Genereert alle AI-zichtbaarheidsbestanden opnieuw (llms.txt, llms-full.txt, ai.txt, identity.json)"
 
 #: src/Abilities/Registration.php:52
 msgid "Get site summary"
-msgstr ""
+msgstr "Sitesamenvatting ophalen"
 
 #: src/Abilities/Registration.php:53
 msgid "Returns a structured summary of the site for AI agents"
-msgstr ""
+msgstr "Geeft een gestructureerde samenvatting van de site voor AI-agents terug"
 
 #: src/Admin/Diagnostics.php:71
 msgid "Pretty permalinks"
-msgstr ""
+msgstr "Nette permalinks"
 
 #: src/Admin/Diagnostics.php:73
 msgid "Rewrite rules can resolve the endpoints."
-msgstr ""
+msgstr "De rewrite-regels kunnen de endpoints herkennen."
 
 #: src/Admin/Diagnostics.php:74
 msgid "Set to anything but \"Plain\" under Settings → Permalinks, or every endpoint answers 404."
-msgstr ""
+msgstr "Stel bij Instellingen → Permalinks iets anders in dan \"Standaard\", anders geeft elk eindpunt een 404."
 
 #: src/Admin/Diagnostics.php:88
 msgid "Writable cache directory"
-msgstr ""
+msgstr "Beschrijfbare cachemap"
 
 #: src/Admin/Diagnostics.php:90
 msgid "Generated files are stored in the uploads folder."
-msgstr ""
+msgstr "Gegenereerde bestanden worden opgeslagen in de map uploads."
 
 #: src/Admin/Diagnostics.php:91
 msgid "The uploads folder is not writable, so regeneration cannot store anything."
-msgstr ""
+msgstr "De map uploads is niet beschrijfbaar, waardoor het opnieuw genereren niets kan opslaan."
 
 #: src/Admin/Diagnostics.php:105
 msgid "Site visible to crawlers"
-msgstr ""
+msgstr "Site zichtbaar voor crawlers"
 
 #: src/Admin/Diagnostics.php:107
 msgid "robots.txt carries the AI crawler directives."
-msgstr ""
+msgstr "robots.txt bevat de richtlijnen voor AI-crawlers."
 
 #: src/Admin/Diagnostics.php:108
 msgid "\"Discourage search engines\" is on, so the AI directives are withheld from robots.txt."
-msgstr ""
+msgstr "\"Zoekmachines ontmoedigen\" staat aan, waardoor de AI-richtlijnen niet in robots.txt worden opgenomen."
 
 #: src/Admin/Diagnostics.php:128
 msgid "Files generated"
-msgstr ""
+msgstr "Gegenereerde bestanden"
 
 #: src/Admin/Diagnostics.php:130
 msgid "All four files are on disk."
-msgstr ""
+msgstr "Alle vier de bestanden staan op schijf."
 
 #. translators: %s: comma-separated list of file names.
 #: src/Admin/Diagnostics.php:133
 #, php-format
 msgid "Not generated yet: %s. They are built on first request, or now with the button above."
-msgstr ""
+msgstr "Nog niet gegenereerd: %s. Ze worden bij het eerste verzoek aangemaakt, of nu met de knop hierboven."
 
 #: src/Admin/Diagnostics.php:149
 msgid "Abilities API"
-msgstr ""
+msgstr "Abilities API"
 
 #: src/Admin/Diagnostics.php:151
 msgid "MCP clients can call this site through the Abilities API."
-msgstr ""
+msgstr "MCP-clients kunnen deze site rechtstreeks bevragen via de Abilities API."
 
 #: src/Admin/Diagnostics.php:152
 msgid "Requires WordPress 6.9 or newer. Everything else works without it."
-msgstr ""
+msgstr "Vereist WordPress 6.9 of nieuwer. Al het andere werkt ook zonder."
 
 #: src/Admin/SettingsPage.php:38
 #: src/Admin/SettingsPage.php:363
 msgid "Dashboard"
-msgstr ""
+msgstr "Dashboard"
 
 #: src/Admin/SettingsPage.php:39
 msgid "Files and health checks"
-msgstr ""
+msgstr "Bestanden en controles"
 
 #: src/Admin/SettingsPage.php:42
 #: src/Admin/SettingsPage.php:447
 msgid "Discovery"
-msgstr ""
+msgstr "Ontdekking"
 
 #: src/Admin/SettingsPage.php:43
 msgid "What gets published"
-msgstr ""
+msgstr "Wat er gepubliceerd wordt"
 
 #: src/Admin/SettingsPage.php:46
 #: src/Admin/SettingsPage.php:495
 msgid "Content"
-msgstr ""
+msgstr "Inhoud"
 
 #: src/Admin/SettingsPage.php:47
 msgid "What goes into the files"
-msgstr ""
+msgstr "Wat in de bestanden komt"
 
 #: src/Admin/SettingsPage.php:50
 #: src/Admin/SettingsPage.php:553
 msgid "AI crawlers"
-msgstr ""
+msgstr "AI-crawlers"
 
 #: src/Admin/SettingsPage.php:51
 msgid "Who may read the site"
-msgstr ""
+msgstr "Wie de site mag lezen"
 
 #: src/Admin/SettingsPage.php:54
 #: src/Admin/SettingsPage.php:595
 msgid "Identity"
-msgstr ""
+msgstr "Identiteit"
 
 #: src/Admin/SettingsPage.php:55
 msgid "Who publishes it"
-msgstr ""
+msgstr "Wie het publiceert"
 
 #: src/Admin/SettingsPage.php:208
 msgid "You are not allowed to regenerate these files."
-msgstr ""
+msgstr "Je hebt geen toestemming om deze bestanden opnieuw te genereren."
 
 #. translators: %s: comma-separated list of file names.
 #: src/Admin/SettingsPage.php:219
 #, php-format
 msgid "Could not write: %s. Check that the uploads directory is writable."
-msgstr ""
+msgstr "Kon niet schrijven: %s. Controleer of de map uploads beschrijfbaar is."
 
 #: src/Admin/SettingsPage.php:226
 msgid "All files regenerated."
-msgstr ""
+msgstr "Alle bestanden zijn opnieuw gegenereerd."
 
 #: src/Admin/SettingsPage.php:259
 msgid "Regenerating…"
-msgstr ""
+msgstr "Opnieuw genereren…"
 
 #: src/Admin/SettingsPage.php:260
 msgid "Regeneration failed."
-msgstr ""
+msgstr "Opnieuw genereren mislukt."
 
 #: src/Admin/SettingsPage.php:261
 msgid "Copied"
-msgstr ""
+msgstr "Gekopieerd"
 
 #: src/Admin/SettingsPage.php:262
 msgid "Press Ctrl+C to copy"
-msgstr ""
+msgstr "Druk op Ctrl+C om te kopiëren"
 
 #: src/Admin/SettingsPage.php:272
 msgid "Everything checks out"
-msgstr ""
+msgstr "Alles in orde"
 
 #: src/Admin/SettingsPage.php:273
 msgid "Needs attention"
-msgstr ""
+msgstr "Vereist aandacht"
 
 #: src/Admin/SettingsPage.php:274
 msgid "Action required"
-msgstr ""
+msgstr "Actie vereist"
 
 #: src/Admin/SettingsPage.php:286
 msgid "What this site publishes for LLMs, AI search and AI agents."
-msgstr ""
+msgstr "Wat deze site publiceert voor LLM's, AI-zoekmachines en AI-agents."
 
 #: src/Admin/SettingsPage.php:302
 msgid "Settings sections"
-msgstr ""
+msgstr "Instellingsonderdelen"
 
 #: src/Admin/SettingsPage.php:339
 msgid "Files are rebuilt automatically when a tracked post is saved."
-msgstr ""
+msgstr "Bestanden worden automatisch opnieuw opgebouwd zodra een gevolgd bericht wordt opgeslagen."
 
 #: src/Admin/SettingsPage.php:340
 msgid "Save changes"
-msgstr ""
+msgstr "Wijzigingen opslaan"
 
 #: src/Admin/SettingsPage.php:364
 msgid "The files this site publishes, and whether anything is stopping them from being served."
-msgstr ""
+msgstr "De bestanden die deze site publiceert, en of er iets is dat verhindert dat ze worden geleverd."
 
 #: src/Admin/SettingsPage.php:382
 msgid "Regenerate all files"
-msgstr ""
+msgstr "Alle bestanden opnieuw genereren"
 
 #: src/Admin/SettingsPage.php:409
 msgid "Size"
-msgstr ""
+msgstr "Grootte"
 
 #: src/Admin/SettingsPage.php:411
 msgid "Updated"
-msgstr ""
+msgstr "Bijgewerkt"
 
 #: src/Admin/SettingsPage.php:412
 msgid "Not generated"
-msgstr ""
+msgstr "Niet gegenereerd"
 
 #: src/Admin/SettingsPage.php:414
 msgid "View"
-msgstr ""
+msgstr "Bekijken"
 
 #: src/Admin/SettingsPage.php:415
 msgid "Copy URL"
-msgstr ""
+msgstr "URL kopiëren"
 
 #: src/Admin/SettingsPage.php:421
 msgid "Checks"
-msgstr ""
+msgstr "Controles"
 
 #: src/Admin/SettingsPage.php:448
 msgid "Which formats this site publishes. Turning one off removes its endpoint entirely."
-msgstr ""
+msgstr "Welke formaten deze site publiceert. Eentje uitzetten verwijdert het bijbehorende eindpunt volledig."
 
 #: src/Admin/SettingsPage.php:455
 msgid "llms.txt and llms-full.txt"
-msgstr ""
+msgstr "llms.txt en llms-full.txt"
 
 #: src/Admin/SettingsPage.php:456
 msgid "A structured index of the site, and one document containing every tracked page."
-msgstr ""
+msgstr "Een gestructureerde index van de site, en één document met elke gevolgde pagina."
 
 #: src/Admin/SettingsPage.php:461
 msgid "Markdown for every page"
-msgstr ""
+msgstr "Markdown voor elke pagina"
 
 #: src/Admin/SettingsPage.php:462
 msgid "Serves /any-page.md and ?format=md, and advertises it from the HTML page."
-msgstr ""
+msgstr "Levert /any-page.md en ?format=md, en kondigt dit aan vanaf de HTML-pagina."
 
 #: src/Admin/SettingsPage.php:467
 msgid "AI directives in robots.txt"
-msgstr ""
+msgstr "AI-richtlijnen in robots.txt"
 
 #: src/Admin/SettingsPage.php:468
 msgid "Adds an explicit Allow or Disallow block per AI crawler."
-msgstr ""
+msgstr "Voegt een expliciet Allow- of Disallow-blok toe per AI-crawler."
 
 #: src/Admin/SettingsPage.php:473
 msgid "Discovery files"
-msgstr ""
+msgstr "Ontdekkingsbestanden"
 
 #: src/Admin/SettingsPage.php:474
 msgid "Publishes ai.txt and identity.json under /.well-known/ and /ai-discovery/."
-msgstr ""
+msgstr "Publiceert ai.txt en identity.json onder /.well-known/ en /ai-discovery/."
 
 #: src/Admin/SettingsPage.php:479
 msgid "MCP abilities"
-msgstr ""
+msgstr "MCP-mogelijkheden"
 
 #: src/Admin/SettingsPage.php:480
 msgid "Lets an MCP client query this site directly. Requires WordPress 6.9 or newer."
-msgstr ""
+msgstr "Laat een MCP-client deze site rechtstreeks bevragen. Vereist WordPress 6.9 of nieuwer."
 
 #: src/Admin/SettingsPage.php:496
 msgid "What goes into the generated files, and how much of it."
-msgstr ""
+msgstr "Wat er in de gegenereerde bestanden komt, en hoeveel daarvan."
 
 #: src/Admin/SettingsPage.php:501
 msgid "How to describe this site"
-msgstr ""
+msgstr "Hoe deze site te beschrijven"
 
 #: src/Admin/SettingsPage.php:502
 msgid "What the site is, who it serves, what it covers. Appears at the top of llms.txt, ai.txt and identity.json. Left empty, the WordPress tagline is used."
-msgstr ""
+msgstr "Wat de site is, voor wie hij bedoeld is, wat hij behandelt. Verschijnt bovenaan llms.txt, ai.txt en identity.json. Blijft dit leeg, dan wordt de WordPress-tagline gebruikt."
 
 #: src/Admin/SettingsPage.php:505
 msgid "A small design studio building websites and brand identities for independent shops and restaurants."
-msgstr ""
+msgstr "Een klein designstudio dat websites en merkidentiteiten bouwt voor onafhankelijke winkels en restaurants."
 
 #: src/Admin/SettingsPage.php:511
 msgid "Post types to publish"
-msgstr ""
+msgstr "Te publiceren berichttypen"
 
 #: src/Admin/SettingsPage.php:512
 msgid "Only public post types are listed. Attachments are never included."
-msgstr ""
+msgstr "Alleen openbare berichttypen worden weergegeven. Bijlagen worden nooit meegenomen."
 
 #: src/Admin/SettingsPage.php:535
 msgid "Entries per post type"
-msgstr ""
+msgstr "Items per berichttype"
 
 #: src/Admin/SettingsPage.php:536
 msgid "An upper bound per type, so llms.txt stays readable on a large site."
-msgstr ""
+msgstr "Een bovengrens per type, zodat llms.txt leesbaar blijft op een grote site."
 
 #: src/Admin/SettingsPage.php:554
 msgid "One crawler name per line. These become User-agent blocks in robots.txt."
-msgstr ""
+msgstr "Eén crawlernaam per regel. Deze worden User-agent-blokken in robots.txt."
 
 #: src/Admin/SettingsPage.php:561
 msgid "Allowed"
-msgstr ""
+msgstr "Toegestaan"
 
 #: src/Admin/SettingsPage.php:562
 msgid "Crawlers that answer questions and cite sources. Allowing them is how the site gets quoted."
-msgstr ""
+msgstr "Crawlers die vragen beantwoorden en bronnen citeren. Ze toestaan is hoe de site geciteerd wordt."
 
 #: src/Admin/SettingsPage.php:570
 msgid "Blocked"
-msgstr ""
+msgstr "Geblokkeerd"
 
 #: src/Admin/SettingsPage.php:571
 msgid "Crawlers that collect training data without attribution."
-msgstr ""
+msgstr "Crawlers die trainingsdata verzamelen zonder bronvermelding."
 
 #: src/Admin/SettingsPage.php:581
 msgid "A crawler named in neither list is not mentioned in robots.txt at all, and follows whatever your general rules say."
-msgstr ""
+msgstr "Een crawler die in geen van beide lijsten voorkomt, wordt helemaal niet vermeld in robots.txt en volgt je algemene regels."
 
 #: src/Admin/SettingsPage.php:596
 msgid "Who is behind the site. Published in identity.json as a schema.org Organization."
-msgstr ""
+msgstr "Wie er achter de site zit. Gepubliceerd in identity.json als een schema.org Organization."
 
 #: src/Admin/SettingsPage.php:608
 msgid "Contact email"
-msgstr ""
+msgstr "Contact-e-mailadres"
 
 #: src/Admin/SettingsPage.php:609
 msgid "Where an AI agent or its operator should write. Defaults to the site administrator."
-msgstr ""
+msgstr "Waar een AI-agent of de beheerder ervan naartoe moet schrijven. Standaard de sitebeheerder."
 
 #: src/Admin/SettingsPage.php:616
 msgid "Profiles elsewhere"
-msgstr ""
+msgstr "Profielen elders"
 
 #: src/Admin/SettingsPage.php:617
 msgid "One URL per line. Published as sameAs, which is how an engine confirms two profiles are the same organisation."
-msgstr ""
+msgstr "Eén URL per regel. Gepubliceerd als sameAs, waarmee een engine bevestigt dat twee profielen dezelfde organisatie zijn."
 
 #. translators: %s: number of published entries.
 #: src/Admin/SettingsPage.php:663
 #, php-format
 msgid "%s published"
 msgid_plural "%s published"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s gepubliceerd"
+msgstr[1] "%s gepubliceerd"

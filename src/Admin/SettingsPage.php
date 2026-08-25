@@ -502,7 +502,7 @@ final class SettingsPage
             __('What the site is, who it serves, what it covers. Appears at the top of llms.txt, ai.txt and identity.json. Left empty, the WordPress tagline is used.', 'ai-visibility'),
             self::asString($settings['site_description']),
             4,
-            __('A municipal opposition site covering local council decisions, budgets and public consultations.', 'ai-visibility'),
+            __('A small design studio building websites and brand identities for independent shops and restaurants.', 'ai-visibility'),
         );
 
         printf(

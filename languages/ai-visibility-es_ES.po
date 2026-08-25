@@ -324,8 +324,8 @@ msgid "What the site is, who it serves, what it covers. Appears at the top of ll
 msgstr "Qué es el sitio, a quién sirve, qué abarca. Aparece al principio de llms.txt, ai.txt e identity.json. Si se deja vacío, se usa la frase descriptiva de WordPress."
 
 #: src/Admin/SettingsPage.php:505
-msgid "A municipal opposition site covering local council decisions, budgets and public consultations."
-msgstr "Un sitio de oposición municipal que cubre las decisiones del ayuntamiento, los presupuestos y las consultas públicas."
+msgid "A small design studio building websites and brand identities for independent shops and restaurants."
+msgstr "Un pequeño estudio de diseño que crea sitios web e identidades de marca para tiendas y restaurantes independientes."
 
 #: src/Admin/SettingsPage.php:511
 msgid "Post types to publish"

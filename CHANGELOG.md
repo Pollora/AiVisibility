@@ -9,10 +9,11 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Added
 
-- French (fr_FR), German (de_DE), Italian (it_IT) and Spanish (es_ES)
-  translations of every user-facing string, including the redesigned settings
-  screen and the plural form used for post counts. WordPress selects the right
-  one from the site's own language setting.
+- French (fr_FR), German (de_DE), Italian (it_IT), Spanish (es_ES), Brazilian
+  Portuguese (pt_BR) and Dutch (nl_NL) translations of every user-facing
+  string, including the redesigned settings screen and the plural form used
+  for post counts. WordPress selects the right one from the site's own
+  language setting.
 
 - **Rebuilt settings screen.** The four stacked `form-table` sections are now
   five panels behind a sidebar: Dashboard, Discovery, Content, AI crawlers,
@@ -54,6 +55,10 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Fixed
 
+- The site-description placeholder example read "A municipal opposition site
+  covering local council decisions, budgets and public consultations." — a
+  leftover from the plugin's own origin, not a generic example for a
+  distributable plugin. Replaced with a neutral one, in every shipped language.
 - **Password-protected posts were exposed through the Markdown endpoint.** The
   converter called `the_content` directly, bypassing the password check, and the
   result was cached in a transient shared by every visitor — so one reader

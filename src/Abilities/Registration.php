@@ -18,23 +18,23 @@ final class Registration
     public function registerCategories(): void
     {
         wp_register_ability_category('ai-visibility', [
-            'label' => __('AI Visibility', 'ai-visibility'),
-            'description' => __('AI discoverability and visibility tools', 'ai-visibility'),
+            'label' => __('AI Visibility', 'amphibee-ai-visibility'),
+            'description' => __('AI discoverability and visibility tools', 'amphibee-ai-visibility'),
         ]);
     }
 
     public function registerAbilities(): void
     {
         wp_register_ability('ai-visibility/get-llms-txt', $this->ability(
-            __('Get llms.txt', 'ai-visibility'),
-            __('Returns the llms.txt content — a structured index of the site for LLMs', 'ai-visibility'),
+            __('Get llms.txt', 'amphibee-ai-visibility'),
+            __('Returns the llms.txt content — a structured index of the site for LLMs', 'amphibee-ai-visibility'),
             static fn (): array => ['content' => FileStore::readOrGenerate(Artifact::LlmsTxt)],
             'read',
         ));
 
         wp_register_ability('ai-visibility/regenerate', $this->ability(
-            __('Regenerate AI files', 'ai-visibility'),
-            __('Regenerates all AI visibility files (llms.txt, llms-full.txt, ai.txt, identity.json)', 'ai-visibility'),
+            __('Regenerate AI files', 'amphibee-ai-visibility'),
+            __('Regenerates all AI visibility files (llms.txt, llms-full.txt, ai.txt, identity.json)', 'amphibee-ai-visibility'),
             static function (): array {
                 $failed = (new Invalidation())->regenerateAll();
 
@@ -49,8 +49,8 @@ final class Registration
         ));
 
         wp_register_ability('ai-visibility/get-site-summary', $this->ability(
-            __('Get site summary', 'ai-visibility'),
-            __('Returns a structured summary of the site for AI agents', 'ai-visibility'),
+            __('Get site summary', 'amphibee-ai-visibility'),
+            __('Returns a structured summary of the site for AI agents', 'amphibee-ai-visibility'),
             static function (): array {
                 $counts = [];
 

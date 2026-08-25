@@ -35,24 +35,24 @@ final class SettingsPage
     {
         return [
             'dashboard' => [
-                'label' => __('Dashboard', 'ai-visibility'),
-                'description' => __('Files and health checks', 'ai-visibility'),
+                'label' => __('Dashboard', 'amphibee-ai-visibility'),
+                'description' => __('Files and health checks', 'amphibee-ai-visibility'),
             ],
             'discovery' => [
-                'label' => __('Discovery', 'ai-visibility'),
-                'description' => __('What gets published', 'ai-visibility'),
+                'label' => __('Discovery', 'amphibee-ai-visibility'),
+                'description' => __('What gets published', 'amphibee-ai-visibility'),
             ],
             'content' => [
-                'label' => __('Content', 'ai-visibility'),
-                'description' => __('What goes into the files', 'ai-visibility'),
+                'label' => __('Content', 'amphibee-ai-visibility'),
+                'description' => __('What goes into the files', 'amphibee-ai-visibility'),
             ],
             'crawlers' => [
-                'label' => __('AI crawlers', 'ai-visibility'),
-                'description' => __('Who may read the site', 'ai-visibility'),
+                'label' => __('AI crawlers', 'amphibee-ai-visibility'),
+                'description' => __('Who may read the site', 'amphibee-ai-visibility'),
             ],
             'identity' => [
-                'label' => __('Identity', 'ai-visibility'),
-                'description' => __('Who publishes it', 'ai-visibility'),
+                'label' => __('Identity', 'amphibee-ai-visibility'),
+                'description' => __('Who publishes it', 'amphibee-ai-visibility'),
             ],
         ];
     }
@@ -118,8 +118,8 @@ final class SettingsPage
     public function register(): void
     {
         add_options_page(
-            __('AI Visibility', 'ai-visibility'),
-            __('AI Visibility', 'ai-visibility'),
+            __('AI Visibility', 'amphibee-ai-visibility'),
+            __('AI Visibility', 'amphibee-ai-visibility'),
             'manage_options',
             self::SLUG,
             [$this, 'render'],
@@ -205,7 +205,7 @@ final class SettingsPage
         // Capability first: an unprivileged user should be told they may not do
         // this, not that their nonce expired.
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(['message' => __('You are not allowed to regenerate these files.', 'ai-visibility')], 403);
+            wp_send_json_error(['message' => __('You are not allowed to regenerate these files.', 'amphibee-ai-visibility')], 403);
         }
 
         check_ajax_referer(self::NONCE_ACTION);
@@ -216,14 +216,14 @@ final class SettingsPage
             wp_send_json_error([
                 'message' => sprintf(
                     /* translators: %s: comma-separated list of file names. */
-                    __('Could not write: %s. Check that the uploads directory is writable.', 'ai-visibility'),
+                    __('Could not write: %s. Check that the uploads directory is writable.', 'amphibee-ai-visibility'),
                     implode(', ', $failed),
                 ),
             ], 500);
         }
 
         wp_send_json_success([
-            'message' => __('All files regenerated.', 'ai-visibility'),
+            'message' => __('All files regenerated.', 'amphibee-ai-visibility'),
             'generated' => wp_date('Y-m-d H:i:s'),
         ]);
     }
@@ -256,10 +256,10 @@ final class SettingsPage
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce(self::NONCE_ACTION),
             'action' => self::NONCE_ACTION,
-            'working' => __('Regenerating…', 'ai-visibility'),
-            'failed' => __('Regeneration failed.', 'ai-visibility'),
-            'copied' => __('Copied', 'ai-visibility'),
-            'copyFailed' => __('Press Ctrl+C to copy', 'ai-visibility'),
+            'working' => __('Regenerating…', 'amphibee-ai-visibility'),
+            'failed' => __('Regeneration failed.', 'amphibee-ai-visibility'),
+            'copied' => __('Copied', 'amphibee-ai-visibility'),
+            'copyFailed' => __('Press Ctrl+C to copy', 'amphibee-ai-visibility'),
         ]);
     }
 
@@ -269,9 +269,9 @@ final class SettingsPage
     {
         $status = Diagnostics::worst();
         $labels = [
-            Diagnostics::PASS => __('Everything checks out', 'ai-visibility'),
-            Diagnostics::WARN => __('Needs attention', 'ai-visibility'),
-            Diagnostics::FAIL => __('Action required', 'ai-visibility'),
+            Diagnostics::PASS => __('Everything checks out', 'amphibee-ai-visibility'),
+            Diagnostics::WARN => __('Needs attention', 'amphibee-ai-visibility'),
+            Diagnostics::FAIL => __('Action required', 'amphibee-ai-visibility'),
         ];
 
         printf(
@@ -286,8 +286,8 @@ final class SettingsPage
             . '<span class="aivis__version">v%s</span>'
             . '</div></header>',
             esc_url(plugins_url('assets/images/logo.svg', \Pollora\AiVisibility\PLUGIN_FILE)),
-            esc_html__('AI Visibility', 'ai-visibility'),
-            esc_html__('What this site publishes for LLMs, AI search and AI agents.', 'ai-visibility'),
+            esc_html__('AI Visibility', 'amphibee-ai-visibility'),
+            esc_html__('What this site publishes for LLMs, AI search and AI agents.', 'amphibee-ai-visibility'),
             esc_attr($status),
             esc_html($labels[$status]),
             esc_html(VERSION),
@@ -303,7 +303,7 @@ final class SettingsPage
      */
     private function renderNav(string $active): void
     {
-        echo '<nav class="aivis__nav" aria-label="' . esc_attr__('Settings sections', 'ai-visibility') . '">';
+        echo '<nav class="aivis__nav" aria-label="' . esc_attr__('Settings sections', 'amphibee-ai-visibility') . '">';
         echo '<ul class="aivis__navlist" role="tablist" aria-orientation="vertical">';
 
         foreach (self::panels() as $id => $panel) {
@@ -340,8 +340,8 @@ final class SettingsPage
             . '<button type="submit" class="aivis-button aivis-button--primary">%s</button>'
             . '</div>',
             $active === 'dashboard' ? ' hidden' : '',
-            esc_html__('Files are rebuilt automatically when a tracked post is saved.', 'ai-visibility'),
-            esc_html__('Save changes', 'ai-visibility'),
+            esc_html__('Files are rebuilt automatically when a tracked post is saved.', 'amphibee-ai-visibility'),
+            esc_html__('Save changes', 'amphibee-ai-visibility'),
         );
     }
 
@@ -364,8 +364,8 @@ final class SettingsPage
         $this->openPanel(
             'dashboard',
             $active,
-            __('Dashboard', 'ai-visibility'),
-            __('The files this site publishes, and whether anything is stopping them from being served.', 'ai-visibility'),
+            __('Dashboard', 'amphibee-ai-visibility'),
+            __('The files this site publishes, and whether anything is stopping them from being served.', 'amphibee-ai-visibility'),
         );
 
         echo '<div class="aivis-grid">';
@@ -383,7 +383,7 @@ final class SettingsPage
             . '<button type="button" class="aivis-button aivis-button--primary" id="ai-visibility-regenerate">%s</button>'
             . '<span class="aivis-actions__status" id="ai-visibility-status" role="status" aria-live="polite"></span>'
             . '</div>',
-            esc_html__('Regenerate all files', 'ai-visibility'),
+            esc_html__('Regenerate all files', 'amphibee-ai-visibility'),
         );
 
         echo '</section>';
@@ -410,19 +410,19 @@ final class SettingsPage
             $stat === null ? ' is-missing' : '',
             esc_html($artifact->value),
             esc_attr($stat === null ? 'warn' : 'pass'),
-            esc_html__('Size', 'ai-visibility'),
+            esc_html__('Size', 'amphibee-ai-visibility'),
             esc_html($stat === null ? '—' : self::formatSize($stat['size'])),
-            esc_html__('Updated', 'ai-visibility'),
-            esc_html($stat === null ? __('Not generated', 'ai-visibility') : self::formatTime($stat['mtime'])),
+            esc_html__('Updated', 'amphibee-ai-visibility'),
+            esc_html($stat === null ? __('Not generated', 'amphibee-ai-visibility') : self::formatTime($stat['mtime'])),
             esc_url($artifact->url()),
-            esc_html__('View', 'ai-visibility'),
-            esc_html__('Copy URL', 'ai-visibility'),
+            esc_html__('View', 'amphibee-ai-visibility'),
+            esc_html__('Copy URL', 'amphibee-ai-visibility'),
         );
     }
 
     private function renderChecks(): void
     {
-        printf('<h3 class="aivis-subhead">%s</h3>', esc_html__('Checks', 'ai-visibility'));
+        printf('<h3 class="aivis-subhead">%s</h3>', esc_html__('Checks', 'amphibee-ai-visibility'));
         echo '<ul class="aivis-checks">';
 
         foreach (Diagnostics::all() as $check) {
@@ -448,40 +448,40 @@ final class SettingsPage
         $this->openPanel(
             'discovery',
             $active,
-            __('Discovery', 'ai-visibility'),
-            __('Which formats this site publishes. Turning one off removes its endpoint entirely.', 'ai-visibility'),
+            __('Discovery', 'amphibee-ai-visibility'),
+            __('Which formats this site publishes. Turning one off removes its endpoint entirely.', 'amphibee-ai-visibility'),
         );
 
         echo '<div class="aivis-stack">';
 
         Field::toggle(
             'enable_llms_txt',
-            __('llms.txt and llms-full.txt', 'ai-visibility'),
-            __('A structured index of the site, and one document containing every tracked page.', 'ai-visibility'),
+            __('llms.txt and llms-full.txt', 'amphibee-ai-visibility'),
+            __('A structured index of the site, and one document containing every tracked page.', 'amphibee-ai-visibility'),
             (bool) $settings['enable_llms_txt'],
         );
         Field::toggle(
             'enable_markdown',
-            __('Markdown for every page', 'ai-visibility'),
-            __('Serves /any-page.md and ?format=md, and advertises it from the HTML page.', 'ai-visibility'),
+            __('Markdown for every page', 'amphibee-ai-visibility'),
+            __('Serves /any-page.md and ?format=md, and advertises it from the HTML page.', 'amphibee-ai-visibility'),
             (bool) $settings['enable_markdown'],
         );
         Field::toggle(
             'enable_robots',
-            __('AI directives in robots.txt', 'ai-visibility'),
-            __('Adds an explicit Allow or Disallow block per AI crawler.', 'ai-visibility'),
+            __('AI directives in robots.txt', 'amphibee-ai-visibility'),
+            __('Adds an explicit Allow or Disallow block per AI crawler.', 'amphibee-ai-visibility'),
             (bool) $settings['enable_robots'],
         );
         Field::toggle(
             'enable_discovery',
-            __('Discovery files', 'ai-visibility'),
-            __('Publishes ai.txt and identity.json under /.well-known/ and /ai-discovery/.', 'ai-visibility'),
+            __('Discovery files', 'amphibee-ai-visibility'),
+            __('Publishes ai.txt and identity.json under /.well-known/ and /ai-discovery/.', 'amphibee-ai-visibility'),
             (bool) $settings['enable_discovery'],
         );
         Field::toggle(
             'enable_abilities',
-            __('MCP abilities', 'ai-visibility'),
-            __('Lets an MCP client query this site directly. Requires WordPress 6.9 or newer.', 'ai-visibility'),
+            __('MCP abilities', 'amphibee-ai-visibility'),
+            __('Lets an MCP client query this site directly. Requires WordPress 6.9 or newer.', 'amphibee-ai-visibility'),
             (bool) $settings['enable_abilities'],
         );
 
@@ -496,24 +496,24 @@ final class SettingsPage
         $this->openPanel(
             'content',
             $active,
-            __('Content', 'ai-visibility'),
-            __('What goes into the generated files, and how much of it.', 'ai-visibility'),
+            __('Content', 'amphibee-ai-visibility'),
+            __('What goes into the generated files, and how much of it.', 'amphibee-ai-visibility'),
         );
 
         Field::textarea(
             'site_description',
-            __('How to describe this site', 'ai-visibility'),
-            __('What the site is, who it serves, what it covers. Appears at the top of llms.txt, ai.txt and identity.json. Left empty, the WordPress tagline is used.', 'ai-visibility'),
+            __('How to describe this site', 'amphibee-ai-visibility'),
+            __('What the site is, who it serves, what it covers. Appears at the top of llms.txt, ai.txt and identity.json. Left empty, the WordPress tagline is used.', 'amphibee-ai-visibility'),
             self::asString($settings['site_description']),
             4,
-            __('A small design studio building websites and brand identities for independent shops and restaurants.', 'ai-visibility'),
+            __('A small design studio building websites and brand identities for independent shops and restaurants.', 'amphibee-ai-visibility'),
         );
 
         printf(
             '<div class="aivis-field"><span class="aivis-field__label">%s</span>'
             . '<p class="aivis-field__help">%s</p><div class="aivis-typegrid">',
-            esc_html__('Post types to publish', 'ai-visibility'),
-            esc_html__('Only public post types are listed. Attachments are never included.', 'ai-visibility'),
+            esc_html__('Post types to publish', 'amphibee-ai-visibility'),
+            esc_html__('Only public post types are listed. Attachments are never included.', 'amphibee-ai-visibility'),
         );
 
         $selected = is_array($settings['post_types']) ? $settings['post_types'] : [];
@@ -536,8 +536,8 @@ final class SettingsPage
 
         Field::number(
             'posts_per_type',
-            __('Entries per post type', 'ai-visibility'),
-            __('An upper bound per type, so llms.txt stays readable on a large site.', 'ai-visibility'),
+            __('Entries per post type', 'amphibee-ai-visibility'),
+            __('An upper bound per type, so llms.txt stays readable on a large site.', 'amphibee-ai-visibility'),
             is_numeric($settings['posts_per_type']) ? (int) $settings['posts_per_type'] : Plugin::defaultSettings()['posts_per_type'],
             Plugin::MIN_POSTS_PER_TYPE,
             Plugin::MAX_POSTS_PER_TYPE,
@@ -554,16 +554,16 @@ final class SettingsPage
         $this->openPanel(
             'crawlers',
             $active,
-            __('AI crawlers', 'ai-visibility'),
-            __('One crawler name per line. These become User-agent blocks in robots.txt.', 'ai-visibility'),
+            __('AI crawlers', 'amphibee-ai-visibility'),
+            __('One crawler name per line. These become User-agent blocks in robots.txt.', 'amphibee-ai-visibility'),
         );
 
         echo '<div class="aivis-columns">';
 
         Field::textarea(
             'crawlers_allow',
-            __('Allowed', 'ai-visibility'),
-            __('Crawlers that answer questions and cite sources. Allowing them is how the site gets quoted.', 'ai-visibility'),
+            __('Allowed', 'amphibee-ai-visibility'),
+            __('Crawlers that answer questions and cite sources. Allowing them is how the site gets quoted.', 'amphibee-ai-visibility'),
             implode("\n", self::asStringList($settings['crawlers_allow'])),
             8,
             "GPTBot\nClaudeBot\nPerplexityBot",
@@ -571,8 +571,8 @@ final class SettingsPage
 
         Field::textarea(
             'crawlers_block',
-            __('Blocked', 'ai-visibility'),
-            __('Crawlers that collect training data without attribution.', 'ai-visibility'),
+            __('Blocked', 'amphibee-ai-visibility'),
+            __('Crawlers that collect training data without attribution.', 'amphibee-ai-visibility'),
             implode("\n", self::asStringList($settings['crawlers_block'])),
             8,
             "CCBot\nBytespider",
@@ -582,7 +582,7 @@ final class SettingsPage
 
         printf(
             '<p class="aivis-note">%s</p>',
-            esc_html__('A crawler named in neither list is not mentioned in robots.txt at all, and follows whatever your general rules say.', 'ai-visibility'),
+            esc_html__('A crawler named in neither list is not mentioned in robots.txt at all, and follows whatever your general rules say.', 'amphibee-ai-visibility'),
         );
 
         echo '</section>';
@@ -596,8 +596,8 @@ final class SettingsPage
         $this->openPanel(
             'identity',
             $active,
-            __('Identity', 'ai-visibility'),
-            __('Who is behind the site. Published in identity.json as a schema.org Organization.', 'ai-visibility'),
+            __('Identity', 'amphibee-ai-visibility'),
+            __('Who is behind the site. Published in identity.json as a schema.org Organization.', 'amphibee-ai-visibility'),
         );
 
         $email = self::asString($settings['identity_email']);
@@ -609,16 +609,16 @@ final class SettingsPage
 
         Field::input(
             'identity_email',
-            __('Contact email', 'ai-visibility'),
-            __('Where an AI agent or its operator should write. Defaults to the site administrator.', 'ai-visibility'),
+            __('Contact email', 'amphibee-ai-visibility'),
+            __('Where an AI agent or its operator should write. Defaults to the site administrator.', 'amphibee-ai-visibility'),
             $email,
             'email',
         );
 
         Field::textarea(
             'identity_socials',
-            __('Profiles elsewhere', 'ai-visibility'),
-            __('One URL per line. Published as sameAs, which is how an engine confirms two profiles are the same organisation.', 'ai-visibility'),
+            __('Profiles elsewhere', 'amphibee-ai-visibility'),
+            __('One URL per line. Published as sameAs, which is how an engine confirms two profiles are the same organisation.', 'amphibee-ai-visibility'),
             implode("\n", self::asStringList($settings['identity_socials'])),
             4,
             "https://example.com/@handle\nhttps://www.linkedin.com/company/name",
@@ -664,7 +664,7 @@ final class SettingsPage
 
         return sprintf(
             /* translators: %s: number of published entries. */
-            _n('%s published', '%s published', $total, 'ai-visibility'),
+            _n('%s published', '%s published', $total, 'amphibee-ai-visibility'),
             number_format_i18n($total),
         );
     }

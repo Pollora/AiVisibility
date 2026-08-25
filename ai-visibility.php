@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name: AI Visibility
+ * Plugin Name: AmphiBee AI Visibility
  * Description: Maximize site visibility for AI engines — llms.txt, Markdown endpoints, robots.txt AI directives, AI discovery files, and MCP abilities.
- * Version: 1.2.0
+ * Version: 1.3.0
  * Author: AmphiBee
  * Author URI: https://amphibee.fr
  * Requires PHP: 8.3
  * Requires at least: 6.7
  * License: GPL-2.0-or-later
- * Text Domain: ai-visibility
+ * Text Domain: amphibee-ai-visibility
  * Domain Path: /languages
  */
 
@@ -18,7 +18,7 @@ namespace Pollora\AiVisibility;
 
 defined('ABSPATH') || exit;
 
-const VERSION = '1.2.0';
+const VERSION = '1.3.0';
 const PLUGIN_FILE = __FILE__;
 const PLUGIN_DIR = __DIR__;
 const OPTION_KEY = 'ai_visibility_settings';
@@ -36,7 +36,7 @@ add_action('plugins_loaded', static function (): void {
 // wordpress.org get their translations automatically; this covers the ones
 // installing the zip or via Composer.
 add_action('init', static function (): void {
-    load_plugin_textdomain('ai-visibility', false, dirname(plugin_basename(__FILE__)) . '/languages');
+    load_plugin_textdomain('amphibee-ai-visibility', false, dirname(plugin_basename(__FILE__)) . '/languages');
 });
 
 if (defined('WP_CLI') && \WP_CLI) {

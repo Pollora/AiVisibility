@@ -68,10 +68,10 @@ final class Diagnostics
         return [
             'id' => 'permalinks',
             'status' => $pretty ? self::PASS : self::FAIL,
-            'label' => __('Pretty permalinks', 'ai-visibility'),
+            'label' => __('Pretty permalinks', 'amphibee-ai-visibility'),
             'detail' => $pretty
-                ? __('Rewrite rules can resolve the endpoints.', 'ai-visibility')
-                : __('Set to anything but "Plain" under Settings → Permalinks, or every endpoint answers 404.', 'ai-visibility'),
+                ? __('Rewrite rules can resolve the endpoints.', 'amphibee-ai-visibility')
+                : __('Set to anything but "Plain" under Settings → Permalinks, or every endpoint answers 404.', 'amphibee-ai-visibility'),
         ];
     }
 
@@ -85,10 +85,10 @@ final class Diagnostics
         return [
             'id' => 'uploads',
             'status' => $directory !== null && is_writable($directory) ? self::PASS : self::FAIL,
-            'label' => __('Writable cache directory', 'ai-visibility'),
+            'label' => __('Writable cache directory', 'amphibee-ai-visibility'),
             'detail' => $directory !== null && is_writable($directory)
-                ? __('Generated files are stored in the uploads folder.', 'ai-visibility')
-                : __('The uploads folder is not writable, so regeneration cannot store anything.', 'ai-visibility'),
+                ? __('Generated files are stored in the uploads folder.', 'amphibee-ai-visibility')
+                : __('The uploads folder is not writable, so regeneration cannot store anything.', 'amphibee-ai-visibility'),
         ];
     }
 
@@ -102,10 +102,10 @@ final class Diagnostics
         return [
             'id' => 'visibility',
             'status' => $public ? self::PASS : self::WARN,
-            'label' => __('Site visible to crawlers', 'ai-visibility'),
+            'label' => __('Site visible to crawlers', 'amphibee-ai-visibility'),
             'detail' => $public
-                ? __('robots.txt carries the AI crawler directives.', 'ai-visibility')
-                : __('"Discourage search engines" is on, so the AI directives are withheld from robots.txt.', 'ai-visibility'),
+                ? __('robots.txt carries the AI crawler directives.', 'amphibee-ai-visibility')
+                : __('"Discourage search engines" is on, so the AI directives are withheld from robots.txt.', 'amphibee-ai-visibility'),
         ];
     }
 
@@ -125,12 +125,12 @@ final class Diagnostics
         return [
             'id' => 'files',
             'status' => $missing === [] ? self::PASS : self::WARN,
-            'label' => __('Files generated', 'ai-visibility'),
+            'label' => __('Files generated', 'amphibee-ai-visibility'),
             'detail' => $missing === []
-                ? __('All four files are on disk.', 'ai-visibility')
+                ? __('All four files are on disk.', 'amphibee-ai-visibility')
                 : sprintf(
                     /* translators: %s: comma-separated list of file names. */
-                    __('Not generated yet: %s. They are built on first request, or now with the button above.', 'ai-visibility'),
+                    __('Not generated yet: %s. They are built on first request, or now with the button above.', 'amphibee-ai-visibility'),
                     implode(', ', $missing),
                 ),
         ];
@@ -146,10 +146,10 @@ final class Diagnostics
         return [
             'id' => 'abilities',
             'status' => $available ? self::PASS : self::WARN,
-            'label' => __('Abilities API', 'ai-visibility'),
+            'label' => __('Abilities API', 'amphibee-ai-visibility'),
             'detail' => $available
-                ? __('MCP clients can call this site through the Abilities API.', 'ai-visibility')
-                : __('Requires WordPress 6.9 or newer. Everything else works without it.', 'ai-visibility'),
+                ? __('MCP clients can call this site through the Abilities API.', 'amphibee-ai-visibility')
+                : __('Requires WordPress 6.9 or newer. Everything else works without it.', 'amphibee-ai-visibility'),
         ];
     }
 }

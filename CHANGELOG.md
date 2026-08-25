@@ -5,6 +5,24 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.3.0
+
+### Changed
+
+- **The plugin is now named AmphiBee AI Visibility.** The directory rejects
+  generic names — three listed plugins already use "AI Visibility", each of them
+  behind a brand — and a name cannot be changed once approved.
+- **The text domain is now `amphibee-ai-visibility`.** WordPress.org derives a
+  plugin's slug from its name and names its language packs after that slug, so a
+  domain that does not match it never receives a community translation. The
+  shipped catalogues are renamed with it.
+
+  Sites carrying their own translation of this plugin under the old
+  `ai-visibility` domain need to rename that file to match. Nothing else is
+  affected: the settings URL, the WP-CLI command, the ability identifiers, the
+  hook prefix, the option keys and the uploads directory are all unchanged, so
+  no generated file moves and no bookmark breaks.
+
 ## 1.2.0
 
 ### Added

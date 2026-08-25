@@ -1,5 +1,3 @@
-# Copyright (C) 2026 AmphiBee
-# This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
 "Project-Id-Version: AI Visibility 1.0.0\n"
@@ -11,21 +9,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-08-25T08:32:45+00:00\n"
 "PO-Revision-Date: 2026-08-25 14:00+0000\n"
-"X-Generator: WP-CLI 2.12.0\n"
-"X-Domain: ai-visibility\n"
 "Language: pt_BR\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: amphibee-ai-visibility\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-
 
 #. Plugin Name of the plugin
 #: ai-visibility.php
-#: src/Abilities/Registration.php:21
-#: src/Admin/SettingsPage.php:121
-#: src/Admin/SettingsPage.php:122
-#: src/Admin/SettingsPage.php:285
-msgid "AI Visibility"
-msgstr "AI Visibility"
+msgid "AmphiBee AI Visibility"
+msgstr "AmphiBee AI Visibility"
 
 #. Description of the plugin
 #: ai-visibility.php
@@ -41,6 +33,11 @@ msgstr "AmphiBee"
 #: ai-visibility.php
 msgid "https://amphibee.fr"
 msgstr "https://amphibee.fr"
+
+#: src/Abilities/Registration.php:21 src/Admin/SettingsPage.php:121
+#: src/Admin/SettingsPage.php:122 src/Admin/SettingsPage.php:289
+msgid "AI Visibility"
+msgstr "AI Visibility"
 
 #: src/Abilities/Registration.php:22
 msgid "AI discoverability and visibility tools"
@@ -132,8 +129,7 @@ msgstr "Clientes MCP podem consultar este site através da API Abilities."
 msgid "Requires WordPress 6.9 or newer. Everything else works without it."
 msgstr "Requer WordPress 6.9 ou mais recente. Tudo o mais funciona sem isso."
 
-#: src/Admin/SettingsPage.php:38
-#: src/Admin/SettingsPage.php:363
+#: src/Admin/SettingsPage.php:38 src/Admin/SettingsPage.php:367
 msgid "Dashboard"
 msgstr "Painel"
 
@@ -141,8 +137,7 @@ msgstr "Painel"
 msgid "Files and health checks"
 msgstr "Arquivos e verificações"
 
-#: src/Admin/SettingsPage.php:42
-#: src/Admin/SettingsPage.php:447
+#: src/Admin/SettingsPage.php:42 src/Admin/SettingsPage.php:451
 msgid "Discovery"
 msgstr "Descoberta"
 
@@ -150,8 +145,7 @@ msgstr "Descoberta"
 msgid "What gets published"
 msgstr "O que é publicado"
 
-#: src/Admin/SettingsPage.php:46
-#: src/Admin/SettingsPage.php:495
+#: src/Admin/SettingsPage.php:46 src/Admin/SettingsPage.php:499
 msgid "Content"
 msgstr "Conteúdo"
 
@@ -159,8 +153,7 @@ msgstr "Conteúdo"
 msgid "What goes into the files"
 msgstr "O que alimenta os arquivos"
 
-#: src/Admin/SettingsPage.php:50
-#: src/Admin/SettingsPage.php:553
+#: src/Admin/SettingsPage.php:50 src/Admin/SettingsPage.php:557
 msgid "AI crawlers"
 msgstr "Rastreadores de IA"
 
@@ -168,8 +161,7 @@ msgstr "Rastreadores de IA"
 msgid "Who may read the site"
 msgstr "Quem pode ler o site"
 
-#: src/Admin/SettingsPage.php:54
-#: src/Admin/SettingsPage.php:595
+#: src/Admin/SettingsPage.php:54 src/Admin/SettingsPage.php:599
 msgid "Identity"
 msgstr "Identidade"
 
@@ -219,176 +211,176 @@ msgstr "Requer atenção"
 msgid "Action required"
 msgstr "Ação necessária"
 
-#: src/Admin/SettingsPage.php:286
+#: src/Admin/SettingsPage.php:290
 msgid "What this site publishes for LLMs, AI search and AI agents."
 msgstr "O que este site publica para LLMs, buscas com IA e agentes de IA."
 
-#: src/Admin/SettingsPage.php:302
+#: src/Admin/SettingsPage.php:306
 msgid "Settings sections"
 msgstr "Seções de configurações"
 
-#: src/Admin/SettingsPage.php:339
+#: src/Admin/SettingsPage.php:343
 msgid "Files are rebuilt automatically when a tracked post is saved."
 msgstr "Os arquivos são reconstruídos automaticamente quando um conteúdo monitorado é salvo."
 
-#: src/Admin/SettingsPage.php:340
+#: src/Admin/SettingsPage.php:344
 msgid "Save changes"
 msgstr "Salvar alterações"
 
-#: src/Admin/SettingsPage.php:364
+#: src/Admin/SettingsPage.php:368
 msgid "The files this site publishes, and whether anything is stopping them from being served."
 msgstr "Os arquivos que este site publica, e se algo está impedindo que sejam servidos."
 
-#: src/Admin/SettingsPage.php:382
+#: src/Admin/SettingsPage.php:386
 msgid "Regenerate all files"
 msgstr "Regenerar todos os arquivos"
 
-#: src/Admin/SettingsPage.php:409
+#: src/Admin/SettingsPage.php:413
 msgid "Size"
 msgstr "Tamanho"
 
-#: src/Admin/SettingsPage.php:411
+#: src/Admin/SettingsPage.php:415
 msgid "Updated"
 msgstr "Atualizado"
 
-#: src/Admin/SettingsPage.php:412
+#: src/Admin/SettingsPage.php:416
 msgid "Not generated"
 msgstr "Não gerado"
 
-#: src/Admin/SettingsPage.php:414
+#: src/Admin/SettingsPage.php:418
 msgid "View"
 msgstr "Ver"
 
-#: src/Admin/SettingsPage.php:415
+#: src/Admin/SettingsPage.php:419
 msgid "Copy URL"
 msgstr "Copiar URL"
 
-#: src/Admin/SettingsPage.php:421
+#: src/Admin/SettingsPage.php:425
 msgid "Checks"
 msgstr "Verificações"
 
-#: src/Admin/SettingsPage.php:448
+#: src/Admin/SettingsPage.php:452
 msgid "Which formats this site publishes. Turning one off removes its endpoint entirely."
 msgstr "Os formatos que este site publica. Desativar um deles remove completamente o respectivo endpoint."
 
-#: src/Admin/SettingsPage.php:455
+#: src/Admin/SettingsPage.php:459
 msgid "llms.txt and llms-full.txt"
 msgstr "llms.txt e llms-full.txt"
 
-#: src/Admin/SettingsPage.php:456
+#: src/Admin/SettingsPage.php:460
 msgid "A structured index of the site, and one document containing every tracked page."
 msgstr "Um índice estruturado do site, e um único documento com todas as páginas monitoradas."
 
-#: src/Admin/SettingsPage.php:461
+#: src/Admin/SettingsPage.php:465
 msgid "Markdown for every page"
 msgstr "Markdown para cada página"
 
-#: src/Admin/SettingsPage.php:462
+#: src/Admin/SettingsPage.php:466
 msgid "Serves /any-page.md and ?format=md, and advertises it from the HTML page."
 msgstr "Serve /any-page.md e ?format=md, e anuncia isso a partir da página HTML."
 
-#: src/Admin/SettingsPage.php:467
+#: src/Admin/SettingsPage.php:471
 msgid "AI directives in robots.txt"
 msgstr "Diretivas de IA no robots.txt"
 
-#: src/Admin/SettingsPage.php:468
+#: src/Admin/SettingsPage.php:472
 msgid "Adds an explicit Allow or Disallow block per AI crawler."
 msgstr "Adiciona um bloco explícito Allow ou Disallow para cada rastreador de IA."
 
-#: src/Admin/SettingsPage.php:473
+#: src/Admin/SettingsPage.php:477
 msgid "Discovery files"
 msgstr "Arquivos de descoberta"
 
-#: src/Admin/SettingsPage.php:474
+#: src/Admin/SettingsPage.php:478
 msgid "Publishes ai.txt and identity.json under /.well-known/ and /ai-discovery/."
 msgstr "Publica ai.txt e identity.json em /.well-known/ e /ai-discovery/."
 
-#: src/Admin/SettingsPage.php:479
+#: src/Admin/SettingsPage.php:483
 msgid "MCP abilities"
 msgstr "Habilidades MCP"
 
-#: src/Admin/SettingsPage.php:480
+#: src/Admin/SettingsPage.php:484
 msgid "Lets an MCP client query this site directly. Requires WordPress 6.9 or newer."
 msgstr "Permite que um cliente MCP consulte este site diretamente. Requer WordPress 6.9 ou mais recente."
 
-#: src/Admin/SettingsPage.php:496
+#: src/Admin/SettingsPage.php:500
 msgid "What goes into the generated files, and how much of it."
 msgstr "O que alimenta os arquivos gerados, e em que quantidade."
 
-#: src/Admin/SettingsPage.php:501
+#: src/Admin/SettingsPage.php:505
 msgid "How to describe this site"
 msgstr "Como descrever este site"
 
-#: src/Admin/SettingsPage.php:502
+#: src/Admin/SettingsPage.php:506
 msgid "What the site is, who it serves, what it covers. Appears at the top of llms.txt, ai.txt and identity.json. Left empty, the WordPress tagline is used."
 msgstr "O que o site é, a quem atende, o que abrange. Aparece no topo do llms.txt, ai.txt e identity.json. Se deixado em branco, o slogan do WordPress é utilizado."
 
-#: src/Admin/SettingsPage.php:505
+#: src/Admin/SettingsPage.php:509
 msgid "A small design studio building websites and brand identities for independent shops and restaurants."
 msgstr "Um pequeno estúdio de design que cria sites e identidades de marca para lojas e restaurantes independentes."
 
-#: src/Admin/SettingsPage.php:511
+#: src/Admin/SettingsPage.php:515
 msgid "Post types to publish"
 msgstr "Tipos de conteúdo a publicar"
 
-#: src/Admin/SettingsPage.php:512
+#: src/Admin/SettingsPage.php:516
 msgid "Only public post types are listed. Attachments are never included."
 msgstr "Somente tipos de conteúdo públicos são listados. Anexos nunca são incluídos."
 
-#: src/Admin/SettingsPage.php:535
+#: src/Admin/SettingsPage.php:539
 msgid "Entries per post type"
 msgstr "Entradas por tipo de conteúdo"
 
-#: src/Admin/SettingsPage.php:536
+#: src/Admin/SettingsPage.php:540
 msgid "An upper bound per type, so llms.txt stays readable on a large site."
 msgstr "Um limite máximo por tipo, para que o llms.txt continue legível em um site grande."
 
-#: src/Admin/SettingsPage.php:554
+#: src/Admin/SettingsPage.php:558
 msgid "One crawler name per line. These become User-agent blocks in robots.txt."
 msgstr "Um nome de rastreador por linha. Eles se tornam blocos User-agent no robots.txt."
 
-#: src/Admin/SettingsPage.php:561
+#: src/Admin/SettingsPage.php:565
 msgid "Allowed"
 msgstr "Permitidos"
 
-#: src/Admin/SettingsPage.php:562
+#: src/Admin/SettingsPage.php:566
 msgid "Crawlers that answer questions and cite sources. Allowing them is how the site gets quoted."
 msgstr "Rastreadores que respondem perguntas e citam fontes. Permiti-los é como o site passa a ser citado."
 
-#: src/Admin/SettingsPage.php:570
+#: src/Admin/SettingsPage.php:574
 msgid "Blocked"
 msgstr "Bloqueados"
 
-#: src/Admin/SettingsPage.php:571
+#: src/Admin/SettingsPage.php:575
 msgid "Crawlers that collect training data without attribution."
 msgstr "Rastreadores que coletam dados de treinamento sem atribuição."
 
-#: src/Admin/SettingsPage.php:581
+#: src/Admin/SettingsPage.php:585
 msgid "A crawler named in neither list is not mentioned in robots.txt at all, and follows whatever your general rules say."
 msgstr "Um rastreador que não está em nenhuma das listas simplesmente não aparece no robots.txt, e segue as suas regras gerais."
 
-#: src/Admin/SettingsPage.php:596
+#: src/Admin/SettingsPage.php:600
 msgid "Who is behind the site. Published in identity.json as a schema.org Organization."
 msgstr "Quem está por trás do site. Publicado no identity.json como uma Organization do schema.org."
 
-#: src/Admin/SettingsPage.php:608
+#: src/Admin/SettingsPage.php:612
 msgid "Contact email"
 msgstr "E-mail de contato"
 
-#: src/Admin/SettingsPage.php:609
+#: src/Admin/SettingsPage.php:613
 msgid "Where an AI agent or its operator should write. Defaults to the site administrator."
 msgstr "Para onde um agente de IA ou seu operador deve escrever. Por padrão, é o administrador do site."
 
-#: src/Admin/SettingsPage.php:616
+#: src/Admin/SettingsPage.php:620
 msgid "Profiles elsewhere"
 msgstr "Perfis em outras plataformas"
 
-#: src/Admin/SettingsPage.php:617
+#: src/Admin/SettingsPage.php:621
 msgid "One URL per line. Published as sameAs, which is how an engine confirms two profiles are the same organisation."
 msgstr "Uma URL por linha. Publicado como sameAs, que é como um mecanismo confirma que dois perfis são da mesma organização."
 
 #. translators: %s: number of published entries.
-#: src/Admin/SettingsPage.php:663
+#: src/Admin/SettingsPage.php:667
 #, php-format
 msgid "%s published"
 msgid_plural "%s published"

@@ -63,7 +63,7 @@
     <rule ref="WordPress.WP.I18n">
         <properties>
             <property name="text_domain" type="array">
-                <element value="ai-visibility"/>
+                <element value="amphibee-ai-visibility"/>
             </property>
         </properties>
     </rule>

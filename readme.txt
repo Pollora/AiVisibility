@@ -1,10 +1,10 @@
-=== AI Visibility ===
+=== AmphiBee AI Visibility ===
 Contributors: ogorzalka
 Tags: llms-txt, ai, markdown, seo, robots-txt
 Requires at least: 6.7
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -171,6 +171,11 @@ that keep a plugin like this one out of your error log.
 
 == Changelog ==
 
+= 1.3.0 =
+
+* Renamed to AmphiBee AI Visibility. The directory does not accept generic names, and three listed plugins already use "AI Visibility" — each behind a brand of its own.
+* The text domain is now `amphibee-ai-visibility`, matching the slug, which is what community language packs are keyed on. If you ship your own translation of this plugin, rename the file to match. The settings URL, WP-CLI command, hooks, options and uploads directory are unchanged.
+
 = 1.2.0 =
 
 * The plugin's mark now sits in the settings masthead — the same one this listing shows, so wp-admin and the directory carry one identity.
@@ -199,6 +204,11 @@ that keep a plugin like this one out of your error log.
 * Description and noindex detection for The SEO Framework, Yoast SEO, Rank Math and SEOPress.
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+The plugin is renamed to AmphiBee AI Visibility and its text domain now matches
+its slug. Your settings, generated files and URLs are untouched. Only a
+self-hosted translation file would need renaming.
 
 = 1.2.0 =
 Cosmetic and metadata only: the plugin's mark appears in the settings header,

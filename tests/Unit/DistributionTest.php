@@ -57,7 +57,7 @@ describe('plugin header', function (): void {
     });
 
     it('uses the text domain the code actually calls', function (): void {
-        expect($this->header['Text Domain'])->toBe('ai-visibility');
+        expect($this->header['Text Domain'])->toBe('amphibee-ai-visibility');
     });
 
     it('requires the PHP version composer.json requires', function (): void {
@@ -158,14 +158,14 @@ describe('shipped files', function () use ($root): void {
     });
 
     it('ships a translation template at the advertised Domain Path', function () use ($root): void {
-        expect($root . '/languages/ai-visibility.pot')->toBeReadableFile();
+        expect($root . '/languages/amphibee-ai-visibility.pot')->toBeReadableFile();
     });
 
     it('declares every translatable string in the template', function () use ($root): void {
-        $template = (string) file_get_contents($root . '/languages/ai-visibility.pot');
+        $template = (string) file_get_contents($root . '/languages/amphibee-ai-visibility.pot');
 
         expect($template)
-            ->toContain('"X-Domain: ai-visibility')
+            ->toContain('"X-Domain: amphibee-ai-visibility')
             ->toContain('msgid "AI Visibility"');
     });
 
@@ -209,7 +209,7 @@ describe('internationalisation', function () use ($root): void {
                 preg_match_all("/\b(?:__|_e|esc_html__|esc_html_e|esc_attr__|_x|_n)\([^)]*?,\s*'([a-z0-9-]+)'\s*\)/", $source, $matches);
 
                 foreach ($matches[1] as $domain) {
-                    if ($domain !== 'ai-visibility') {
+                    if ($domain !== 'amphibee-ai-visibility') {
                         $wrong[] = $file->getFilename() . ': ' . $domain;
                     }
                 }
@@ -224,7 +224,7 @@ describe('translations', function () use ($root): void {
     it('ships a compiled catalogue for every shipped .po', function () use ($root): void {
         $languages = $root . '/languages';
 
-        foreach (glob($languages . '/ai-visibility-*.po') as $po) {
+        foreach (glob($languages . '/amphibee-ai-visibility-*.po') as $po) {
             $mo = substr($po, 0, -3) . '.mo';
 
             expect($mo)->toBeReadableFile();
@@ -233,12 +233,12 @@ describe('translations', function () use ($root): void {
 
     it('translates every string the .pot declares, for every shipped language', function () use ($root): void {
         $languages = $root . '/languages';
-        $potIds = distributionExtractMsgids((string) file_get_contents($languages . '/ai-visibility.pot'));
+        $potIds = distributionExtractMsgids((string) file_get_contents($languages . '/amphibee-ai-visibility.pot'));
 
         // The template's own entries carry no msgstr; that's what the template is for.
         expect($potIds)->not->toBe([]);
 
-        foreach (glob($languages . '/ai-visibility-*.po') as $po) {
+        foreach (glob($languages . '/amphibee-ai-visibility-*.po') as $po) {
             $locale = basename($po, '.po');
             $source = (string) file_get_contents($po);
             $poIds = distributionExtractMsgids($source);
@@ -251,7 +251,7 @@ describe('translations', function () use ($root): void {
     });
 
     it('declares a plural form for every language it ships', function () use ($root): void {
-        foreach (glob($root . '/languages/ai-visibility-*.po') as $po) {
+        foreach (glob($root . '/languages/amphibee-ai-visibility-*.po') as $po) {
             expect((string) file_get_contents($po))->toContain('Plural-Forms:');
         }
     });

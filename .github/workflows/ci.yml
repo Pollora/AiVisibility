@@ -51,7 +51,7 @@ jobs:
       - name: The translation template must match the source
         run: |
           wp i18n make-pot . /tmp/regenerated.pot \
-            --slug=ai-visibility --domain=ai-visibility \
+            --slug=amphibee-ai-visibility --domain=amphibee-ai-visibility \
             --exclude=vendor,tests,build,node_modules \
             --headers='{"Report-Msgid-Bugs-To":"https://github.com/Pollora/AiVisibility/issues","Last-Translator":"Pollora","Language-Team":"Pollora"}'
 
@@ -70,12 +70,12 @@ jobs:
           # and `wp i18n make-pot` refreshes them whenever it next runs.
           strip() { grep -vE '^"POT-Creation-Date:|^#: ' "$1"; }
 
-          if ! diff -u <(strip languages/ai-visibility.pot) <(strip /tmp/regenerated.pot); then
-            echo '::error file=languages/ai-visibility.pot::out of date — run `wp i18n make-pot` and commit the result'
+          if ! diff -u <(strip languages/amphibee-ai-visibility.pot) <(strip /tmp/regenerated.pot); then
+            echo '::error file=languages/amphibee-ai-visibility.pot::out of date — run `wp i18n make-pot` and commit the result'
             exit 1
           fi
 
-          echo 'languages/ai-visibility.pot is up to date.'
+          echo 'languages/amphibee-ai-visibility.pot is up to date.'
 
   # ---------------------------------------------------------------------------
   # Static analysis and coding standards. One PHP version is enough: PHPStan's

@@ -66,6 +66,13 @@ Then visit `Settings → AI Visibility`.
 
 [releases]: https://github.com/Pollora/AiVisibility/releases/latest
 
+## Languages
+
+The admin screen and every user-facing message are translatable. Shipped
+translations: French (fr_FR), German (de_DE), Italian (it_IT), Spanish (es_ES).
+WordPress loads the right one automatically from the site's own language
+setting; nothing to configure. Untranslated locales fall back to English.
+
 ## Configuration
 
 Everything is optional; the defaults publish `post` and `page`, allow the

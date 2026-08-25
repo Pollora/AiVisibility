@@ -205,3 +205,84 @@ describe('internationalisation', function () use ($root): void {
         expect($wrong)->toBe([]);
     });
 });
+
+describe('translations', function () use ($root): void {
+    it('ships a compiled catalogue for every shipped .po', function () use ($root): void {
+        $languages = $root . '/languages';
+
+        foreach (glob($languages . '/ai-visibility-*.po') as $po) {
+            $mo = substr($po, 0, -3) . '.mo';
+
+            expect($mo)->toBeReadableFile();
+        }
+    });
+
+    it('translates every string the .pot declares, for every shipped language', function () use ($root): void {
+        $languages = $root . '/languages';
+        $potIds = distributionExtractMsgids((string) file_get_contents($languages . '/ai-visibility.pot'));
+
+        // The template's own entries carry no msgstr; that's what the template is for.
+        expect($potIds)->not->toBe([]);
+
+        foreach (glob($languages . '/ai-visibility-*.po') as $po) {
+            $locale = basename($po, '.po');
+            $source = (string) file_get_contents($po);
+            $poIds = distributionExtractMsgids($source);
+
+            expect($poIds)->toBe($potIds, "{$locale}: does not declare the same strings as the .pot");
+
+            $blank = distributionBlankMsgstrs($source);
+            expect($blank)->toBe([], "{$locale}: missing a translation for: " . implode(', ', $blank));
+        }
+    });
+
+    it('declares a plural form for every language it ships', function () use ($root): void {
+        foreach (glob($root . '/languages/ai-visibility-*.po') as $po) {
+            expect((string) file_get_contents($po))->toContain('Plural-Forms:');
+        }
+    });
+});
+
+/**
+ * @return list<string>
+ */
+function distributionExtractMsgids(string $source): array
+{
+    preg_match_all('/^msgid "(.*)"$/m', $source, $matches);
+
+    // The header carries an empty msgid; every real entry has content.
+    return array_values(array_filter($matches[1], static fn (string $id): bool => $id !== ''));
+}
+
+/**
+ * msgid values whose msgstr (or every msgstr[n] for a plural entry) is empty.
+ *
+ * @return list<string>
+ */
+function distributionBlankMsgstrs(string $source): array
+{
+    $entries = preg_split('/\n\n+/', trim($source));
+    $blank = [];
+
+    foreach ($entries as $entry) {
+        if (!preg_match('/^msgid "(.*)"$/m', $entry, $id) || $id[1] === '') {
+            continue;
+        }
+
+        if (preg_match('/^msgstr\[0\] "(.*)"$/m', $entry, $first)) {
+            // Plural entry: every numbered form must be filled.
+            preg_match_all('/^msgstr\[\d+\] "(.*)"$/m', $entry, $forms);
+            if (in_array('', $forms[1], true)) {
+                $blank[] = $id[1];
+            }
+
+            continue;
+        }
+
+        if (preg_match('/^msgstr "(.*)"$/m', $entry, $str) && $str[1] === '') {
+            $blank[] = $id[1];
+        }
+    }
+
+    return $blank;
+}

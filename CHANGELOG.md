@@ -9,6 +9,11 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Added
 
+- French (fr_FR), German (de_DE), Italian (it_IT) and Spanish (es_ES)
+  translations of every user-facing string, including the redesigned settings
+  screen and the plural form used for post counts. WordPress selects the right
+  one from the site's own language setting.
+
 - **Rebuilt settings screen.** The four stacked `form-table` sections are now
   five panels behind a sidebar: Dashboard, Discovery, Content, AI crawlers,
   Identity. Each nav entry carries an icon, a label and a one-line description,

@@ -1,0 +1,396 @@
+# Copyright (C) 2026 Pollora
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: AI Visibility 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Pollora/AiVisibility/issues\n"
+"Last-Translator: Pollora\n"
+"Language-Team: Pollora\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-08-25T08:07:35+00:00\n"
+"PO-Revision-Date: 2026-08-25 12:00+0000\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: ai-visibility\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+
+#. Plugin Name of the plugin
+#: ai-visibility.php
+#: src/Abilities/Registration.php:21
+#: src/Admin/SettingsPage.php:121
+#: src/Admin/SettingsPage.php:122
+#: src/Admin/SettingsPage.php:285
+msgid "AI Visibility"
+msgstr "AI Visibility"
+
+#. Description of the plugin
+#: ai-visibility.php
+msgid "Maximize site visibility for AI engines — llms.txt, Markdown endpoints, robots.txt AI directives, AI discovery files, and MCP abilities."
+msgstr "Maximiert die Sichtbarkeit der Website für KI-Engines – llms.txt, Markdown-Endpunkte, KI-Richtlinien in robots.txt, KI-Discovery-Dateien und MCP-Fähigkeiten."
+
+#. Author of the plugin
+#: ai-visibility.php
+msgid "Pollora"
+msgstr "Pollora"
+
+#. Author URI of the plugin
+#: ai-visibility.php
+msgid "https://pollora.com"
+msgstr "https://pollora.com"
+
+#: src/Abilities/Registration.php:22
+msgid "AI discoverability and visibility tools"
+msgstr "Tools für KI-Auffindbarkeit und -Sichtbarkeit"
+
+#: src/Abilities/Registration.php:29
+msgid "Get llms.txt"
+msgstr "llms.txt abrufen"
+
+#: src/Abilities/Registration.php:30
+msgid "Returns the llms.txt content — a structured index of the site for LLMs"
+msgstr "Gibt den Inhalt von llms.txt zurück – einen strukturierten Index der Website für LLMs"
+
+#: src/Abilities/Registration.php:36
+msgid "Regenerate AI files"
+msgstr "KI-Dateien neu generieren"
+
+#: src/Abilities/Registration.php:37
+msgid "Regenerates all AI visibility files (llms.txt, llms-full.txt, ai.txt, identity.json)"
+msgstr "Generiert alle KI-Sichtbarkeitsdateien neu (llms.txt, llms-full.txt, ai.txt, identity.json)"
+
+#: src/Abilities/Registration.php:52
+msgid "Get site summary"
+msgstr "Website-Zusammenfassung abrufen"
+
+#: src/Abilities/Registration.php:53
+msgid "Returns a structured summary of the site for AI agents"
+msgstr "Gibt eine strukturierte Zusammenfassung der Website für KI-Agenten zurück"
+
+#: src/Admin/Diagnostics.php:71
+msgid "Pretty permalinks"
+msgstr "Sprechende Permalinks"
+
+#: src/Admin/Diagnostics.php:73
+msgid "Rewrite rules can resolve the endpoints."
+msgstr "Die Rewrite-Regeln können die Endpunkte auflösen."
+
+#: src/Admin/Diagnostics.php:74
+msgid "Set to anything but \"Plain\" under Settings → Permalinks, or every endpoint answers 404."
+msgstr "Wählen Sie unter Einstellungen → Permalinks etwas anderes als „Einfach“, sonst antwortet jeder Endpunkt mit 404."
+
+#: src/Admin/Diagnostics.php:88
+msgid "Writable cache directory"
+msgstr "Beschreibbares Cache-Verzeichnis"
+
+#: src/Admin/Diagnostics.php:90
+msgid "Generated files are stored in the uploads folder."
+msgstr "Generierte Dateien werden im Uploads-Ordner gespeichert."
+
+#: src/Admin/Diagnostics.php:91
+msgid "The uploads folder is not writable, so regeneration cannot store anything."
+msgstr "Der Uploads-Ordner ist nicht beschreibbar, daher kann die Neugenerierung nichts speichern."
+
+#: src/Admin/Diagnostics.php:105
+msgid "Site visible to crawlers"
+msgstr "Website für Crawler sichtbar"
+
+#: src/Admin/Diagnostics.php:107
+msgid "robots.txt carries the AI crawler directives."
+msgstr "robots.txt enthält die Richtlinien für KI-Crawler."
+
+#: src/Admin/Diagnostics.php:108
+msgid "\"Discourage search engines\" is on, so the AI directives are withheld from robots.txt."
+msgstr "„Suchmaschinen von der Indexierung dieser Website abhalten“ ist aktiviert, daher fehlen die KI-Richtlinien in robots.txt."
+
+#: src/Admin/Diagnostics.php:128
+msgid "Files generated"
+msgstr "Generierte Dateien"
+
+#: src/Admin/Diagnostics.php:130
+msgid "All four files are on disk."
+msgstr "Alle vier Dateien sind vorhanden."
+
+#. translators: %s: comma-separated list of file names.
+#: src/Admin/Diagnostics.php:133
+#, php-format
+msgid "Not generated yet: %s. They are built on first request, or now with the button above."
+msgstr "Noch nicht generiert: %s. Sie werden bei der ersten Anfrage erstellt – oder jetzt über die Schaltfläche oben."
+
+#: src/Admin/Diagnostics.php:149
+msgid "Abilities API"
+msgstr "Abilities API"
+
+#: src/Admin/Diagnostics.php:151
+msgid "MCP clients can call this site through the Abilities API."
+msgstr "MCP-Clients können diese Website über die Abilities API ansprechen."
+
+#: src/Admin/Diagnostics.php:152
+msgid "Requires WordPress 6.9 or newer. Everything else works without it."
+msgstr "Erfordert WordPress 6.9 oder neuer. Alles andere funktioniert auch ohne."
+
+#: src/Admin/SettingsPage.php:38
+#: src/Admin/SettingsPage.php:363
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: src/Admin/SettingsPage.php:39
+msgid "Files and health checks"
+msgstr "Dateien und Statusprüfungen"
+
+#: src/Admin/SettingsPage.php:42
+#: src/Admin/SettingsPage.php:447
+msgid "Discovery"
+msgstr "Erkennung"
+
+#: src/Admin/SettingsPage.php:43
+msgid "What gets published"
+msgstr "Was veröffentlicht wird"
+
+#: src/Admin/SettingsPage.php:46
+#: src/Admin/SettingsPage.php:495
+msgid "Content"
+msgstr "Inhalt"
+
+#: src/Admin/SettingsPage.php:47
+msgid "What goes into the files"
+msgstr "Was in die Dateien einfließt"
+
+#: src/Admin/SettingsPage.php:50
+#: src/Admin/SettingsPage.php:553
+msgid "AI crawlers"
+msgstr "KI-Crawler"
+
+#: src/Admin/SettingsPage.php:51
+msgid "Who may read the site"
+msgstr "Wer die Website lesen darf"
+
+#: src/Admin/SettingsPage.php:54
+#: src/Admin/SettingsPage.php:595
+msgid "Identity"
+msgstr "Identität"
+
+#: src/Admin/SettingsPage.php:55
+msgid "Who publishes it"
+msgstr "Wer ihn veröffentlicht"
+
+#: src/Admin/SettingsPage.php:208
+msgid "You are not allowed to regenerate these files."
+msgstr "Sie sind nicht berechtigt, diese Dateien neu zu generieren."
+
+#. translators: %s: comma-separated list of file names.
+#: src/Admin/SettingsPage.php:219
+#, php-format
+msgid "Could not write: %s. Check that the uploads directory is writable."
+msgstr "Konnte nicht geschrieben werden: %s. Prüfen Sie, ob das Uploads-Verzeichnis beschreibbar ist."
+
+#: src/Admin/SettingsPage.php:226
+msgid "All files regenerated."
+msgstr "Alle Dateien wurden neu generiert."
+
+#: src/Admin/SettingsPage.php:259
+msgid "Regenerating…"
+msgstr "Wird neu generiert …"
+
+#: src/Admin/SettingsPage.php:260
+msgid "Regeneration failed."
+msgstr "Neugenerierung fehlgeschlagen."
+
+#: src/Admin/SettingsPage.php:261
+msgid "Copied"
+msgstr "Kopiert"
+
+#: src/Admin/SettingsPage.php:262
+msgid "Press Ctrl+C to copy"
+msgstr "Zum Kopieren Strg+C drücken"
+
+#: src/Admin/SettingsPage.php:272
+msgid "Everything checks out"
+msgstr "Alles in Ordnung"
+
+#: src/Admin/SettingsPage.php:273
+msgid "Needs attention"
+msgstr "Erfordert Aufmerksamkeit"
+
+#: src/Admin/SettingsPage.php:274
+msgid "Action required"
+msgstr "Handlung erforderlich"
+
+#: src/Admin/SettingsPage.php:286
+msgid "What this site publishes for LLMs, AI search and AI agents."
+msgstr "Was diese Website für LLMs, KI-Suche und KI-Agenten veröffentlicht."
+
+#: src/Admin/SettingsPage.php:302
+msgid "Settings sections"
+msgstr "Einstellungsbereiche"
+
+#: src/Admin/SettingsPage.php:339
+msgid "Files are rebuilt automatically when a tracked post is saved."
+msgstr "Die Dateien werden automatisch neu erstellt, sobald ein erfasster Beitrag gespeichert wird."
+
+#: src/Admin/SettingsPage.php:340
+msgid "Save changes"
+msgstr "Änderungen speichern"
+
+#: src/Admin/SettingsPage.php:364
+msgid "The files this site publishes, and whether anything is stopping them from being served."
+msgstr "Die Dateien, die diese Website veröffentlicht, und ob etwas ihre Auslieferung verhindert."
+
+#: src/Admin/SettingsPage.php:382
+msgid "Regenerate all files"
+msgstr "Alle Dateien neu generieren"
+
+#: src/Admin/SettingsPage.php:409
+msgid "Size"
+msgstr "Größe"
+
+#: src/Admin/SettingsPage.php:411
+msgid "Updated"
+msgstr "Aktualisiert"
+
+#: src/Admin/SettingsPage.php:412
+msgid "Not generated"
+msgstr "Nicht generiert"
+
+#: src/Admin/SettingsPage.php:414
+msgid "View"
+msgstr "Ansehen"
+
+#: src/Admin/SettingsPage.php:415
+msgid "Copy URL"
+msgstr "URL kopieren"
+
+#: src/Admin/SettingsPage.php:421
+msgid "Checks"
+msgstr "Prüfungen"
+
+#: src/Admin/SettingsPage.php:448
+msgid "Which formats this site publishes. Turning one off removes its endpoint entirely."
+msgstr "Welche Formate diese Website veröffentlicht. Das Deaktivieren entfernt den zugehörigen Endpunkt vollständig."
+
+#: src/Admin/SettingsPage.php:455
+msgid "llms.txt and llms-full.txt"
+msgstr "llms.txt und llms-full.txt"
+
+#: src/Admin/SettingsPage.php:456
+msgid "A structured index of the site, and one document containing every tracked page."
+msgstr "Ein strukturierter Index der Website und ein Dokument mit allen erfassten Seiten."
+
+#: src/Admin/SettingsPage.php:461
+msgid "Markdown for every page"
+msgstr "Markdown für jede Seite"
+
+#: src/Admin/SettingsPage.php:462
+msgid "Serves /any-page.md and ?format=md, and advertises it from the HTML page."
+msgstr "Liefert /any-page.md und ?format=md aus und verweist darauf von der HTML-Seite."
+
+#: src/Admin/SettingsPage.php:467
+msgid "AI directives in robots.txt"
+msgstr "KI-Richtlinien in robots.txt"
+
+#: src/Admin/SettingsPage.php:468
+msgid "Adds an explicit Allow or Disallow block per AI crawler."
+msgstr "Fügt für jeden KI-Crawler einen expliziten Allow- oder Disallow-Block hinzu."
+
+#: src/Admin/SettingsPage.php:473
+msgid "Discovery files"
+msgstr "Erkennungsdateien"
+
+#: src/Admin/SettingsPage.php:474
+msgid "Publishes ai.txt and identity.json under /.well-known/ and /ai-discovery/."
+msgstr "Veröffentlicht ai.txt und identity.json unter /.well-known/ und /ai-discovery/."
+
+#: src/Admin/SettingsPage.php:479
+msgid "MCP abilities"
+msgstr "MCP-Fähigkeiten"
+
+#: src/Admin/SettingsPage.php:480
+msgid "Lets an MCP client query this site directly. Requires WordPress 6.9 or newer."
+msgstr "Ermöglicht MCP-Clients die direkte Abfrage dieser Website. Erfordert WordPress 6.9 oder neuer."
+
+#: src/Admin/SettingsPage.php:496
+msgid "What goes into the generated files, and how much of it."
+msgstr "Was in die generierten Dateien einfließt, und wie viel davon."
+
+#: src/Admin/SettingsPage.php:501
+msgid "How to describe this site"
+msgstr "Wie diese Website beschrieben werden soll"
+
+#: src/Admin/SettingsPage.php:502
+msgid "What the site is, who it serves, what it covers. Appears at the top of llms.txt, ai.txt and identity.json. Left empty, the WordPress tagline is used."
+msgstr "Was die Website ist, für wen sie ist, was sie abdeckt. Erscheint oben in llms.txt, ai.txt und identity.json. Bleibt das Feld leer, wird der WordPress-Untertitel verwendet."
+
+#: src/Admin/SettingsPage.php:505
+msgid "A municipal opposition site covering local council decisions, budgets and public consultations."
+msgstr "Eine kommunale Oppositionsseite, die Ratsbeschlüsse, Haushalte und öffentliche Konsultationen begleitet."
+
+#: src/Admin/SettingsPage.php:511
+msgid "Post types to publish"
+msgstr "Zu veröffentlichende Inhaltstypen"
+
+#: src/Admin/SettingsPage.php:512
+msgid "Only public post types are listed. Attachments are never included."
+msgstr "Es werden nur öffentliche Inhaltstypen aufgeführt. Anhänge werden nie einbezogen."
+
+#: src/Admin/SettingsPage.php:535
+msgid "Entries per post type"
+msgstr "Einträge pro Inhaltstyp"
+
+#: src/Admin/SettingsPage.php:536
+msgid "An upper bound per type, so llms.txt stays readable on a large site."
+msgstr "Eine Obergrenze pro Typ, damit llms.txt auch auf einer großen Website lesbar bleibt."
+
+#: src/Admin/SettingsPage.php:554
+msgid "One crawler name per line. These become User-agent blocks in robots.txt."
+msgstr "Ein Crawler-Name pro Zeile. Daraus werden User-Agent-Blöcke in robots.txt."
+
+#: src/Admin/SettingsPage.php:561
+msgid "Allowed"
+msgstr "Erlaubt"
+
+#: src/Admin/SettingsPage.php:562
+msgid "Crawlers that answer questions and cite sources. Allowing them is how the site gets quoted."
+msgstr "Crawler, die Fragen beantworten und Quellen angeben. Sie zuzulassen ist der Weg, damit die Website zitiert wird."
+
+#: src/Admin/SettingsPage.php:570
+msgid "Blocked"
+msgstr "Blockiert"
+
+#: src/Admin/SettingsPage.php:571
+msgid "Crawlers that collect training data without attribution."
+msgstr "Crawler, die Trainingsdaten ohne Quellenangabe sammeln."
+
+#: src/Admin/SettingsPage.php:581
+msgid "A crawler named in neither list is not mentioned in robots.txt at all, and follows whatever your general rules say."
+msgstr "Ein Crawler, der in keiner der beiden Listen steht, wird in robots.txt gar nicht erwähnt und folgt Ihren allgemeinen Regeln."
+
+#: src/Admin/SettingsPage.php:596
+msgid "Who is behind the site. Published in identity.json as a schema.org Organization."
+msgstr "Wer hinter der Website steht. Wird in identity.json als schema.org-Organization veröffentlicht."
+
+#: src/Admin/SettingsPage.php:608
+msgid "Contact email"
+msgstr "Kontakt-E-Mail"
+
+#: src/Admin/SettingsPage.php:609
+msgid "Where an AI agent or its operator should write. Defaults to the site administrator."
+msgstr "Wohin ein KI-Agent oder dessen Betreiber schreiben soll. Standardmäßig der Website-Administrator."
+
+#: src/Admin/SettingsPage.php:616
+msgid "Profiles elsewhere"
+msgstr "Profile auf anderen Plattformen"
+
+#: src/Admin/SettingsPage.php:617
+msgid "One URL per line. Published as sameAs, which is how an engine confirms two profiles are the same organisation."
+msgstr "Eine URL pro Zeile. Wird als sameAs veröffentlicht – so bestätigt eine Engine, dass zwei Profile zur selben Organisation gehören."
+
+#. translators: %s: number of published entries.
+#: src/Admin/SettingsPage.php:663
+#, php-format
+msgid "%s published"
+msgid_plural "%s published"
+msgstr[0] "%s veröffentlicht"
+msgstr[1] "%s veröffentlicht"

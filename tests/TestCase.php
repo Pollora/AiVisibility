@@ -123,6 +123,11 @@ abstract class TestCase extends BaseTestCase
         Functions\when('wp_parse_url')->alias(
             static fn (string $url, int $component = -1) => parse_url($url, $component),
         );
+        // Declared here rather than per-test: the masthead resolves the logo on
+        // every render, and tests run in random order.
+        Functions\when('plugins_url')->alias(
+            static fn (string $path = '', string $plugin = ''): string => 'https://example.test/plugin/' . ltrim($path, '/'),
+        );
     }
 
     private function stubOptions(): void

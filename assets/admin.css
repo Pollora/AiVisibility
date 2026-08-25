@@ -89,6 +89,27 @@
 	background: var(--aivis-paper);
 }
 
+.aivis__identity {
+	display: flex;
+	align-items: center;
+	gap: var(--aivis-space-3);
+	min-width: 0;
+}
+
+/* The same mark the plugin directory shows, at admin scale. Sized here and in
+   the width/height attributes both: the intrinsic size of the file is 942px,
+   and an unsized SVG would reserve that much until the stylesheet applies. */
+.aivis__logo {
+	flex: 0 0 auto;
+	width: 44px;
+	height: 44px;
+}
+
+/* Lets the title and tagline shrink instead of pushing the pill off the row. */
+.aivis__identitytext {
+	min-width: 0;
+}
+
 .aivis__title {
 	margin: 0;
 	padding: 0;

@@ -159,12 +159,11 @@ that keep a plugin like this one out of your error log.
 
 == Screenshots ==
 
-1. The dashboard: every generated file with its size, age and URL, plus health checks for the five conditions that silently break the plugin.
-2. Discovery — which post types are published, how many entries per type, and the site description used as the index header.
-3. Content — Markdown output options and how each page advertises its Markdown twin.
-4. AI crawlers — per-crawler Allow and Disallow directives, written into robots.txt and ai.txt.
-5. Identity — the schema.org Organization description served at /.well-known/identity.json.
-6. The resulting /llms.txt, served to any AI client that asks for it.
+1. The dashboard: every generated file with its size, its age and a copy-URL button, above the health checks for the five conditions that silently break the plugin.
+2. Discovery: the five formats the site publishes, each a switch. Turning one off removes its endpoint entirely.
+3. Content: the description that heads llms.txt, ai.txt and identity.json, which post types feed the files, and the per-type cap.
+4. AI crawlers: one bot per line, allowed or blocked. Each list becomes a User-agent block in robots.txt.
+5. Identity: the contact address and social profiles published as a schema.org Organization in identity.json.
 
 == Changelog ==
 

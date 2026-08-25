@@ -321,9 +321,22 @@ describe('navigation', function (): void {
         // An icon font or a remote sprite would be an outbound request from
         // wp-admin, which this plugin does not make anywhere.
         expect($this->markup)->toContain('<svg')
-            ->not->toContain('<img')
             ->not->toContain('http://fonts.')
             ->not->toContain('https://fonts.');
+    });
+
+    it('fetches no image from anywhere but the plugin directory', function (): void {
+        // The masthead logo is an <img> rather than 5 KB of inline SVG on every
+        // render. That is not a fetch to a third party: it comes from the same
+        // origin admin.css and admin.js already do. Anything pointing elsewhere
+        // would be the outbound request the rule above forbids.
+        preg_match_all('/<img[^>]+src="([^"]+)"/', $this->markup, $sources);
+
+        expect($sources[1])->not->toBeEmpty();
+
+        foreach ($sources[1] as $src) {
+            expect($src)->toStartWith('https://example.test/plugin/');
+        }
     });
 
     it('tells WordPress where to put its notices', function (): void {

@@ -276,12 +276,16 @@ final class SettingsPage
 
         printf(
             '<header class="aivis__masthead">'
-            . '<div class="aivis__identity"><h1 class="aivis__title">%s</h1>'
-            . '<p class="aivis__tagline">%s</p></div>'
+            . '<div class="aivis__identity">'
+            // Decorative: the title sits beside it and says the same thing.
+            . '<img class="aivis__logo" src="%s" alt="" width="44" height="44" decoding="async">'
+            . '<div class="aivis__identitytext"><h1 class="aivis__title">%s</h1>'
+            . '<p class="aivis__tagline">%s</p></div></div>'
             . '<div class="aivis__meta">'
             . '<span class="aivis-pill aivis-pill--%s">%s</span>'
             . '<span class="aivis__version">v%s</span>'
             . '</div></header>',
+            esc_url(plugins_url('assets/images/logo.svg', \Pollora\AiVisibility\PLUGIN_FILE)),
             esc_html__('AI Visibility', 'ai-visibility'),
             esc_html__('What this site publishes for LLMs, AI search and AI agents.', 'ai-visibility'),
             esc_attr($status),

@@ -1,7 +1,7 @@
 === AI Visibility ===
 Contributors: ogorzalka
 Tags: llms-txt, ai, markdown, seo, robots-txt
-Requires at least: 7.0
+Requires at least: 6.7
 Tested up to: 7.0
 Requires PHP: 8.3
 Stable tag: 1.1.0
@@ -58,12 +58,16 @@ in this order: The SEO Framework, Yoast SEO, Rank Math, SEOPress. With none
 installed, the excerpt is used, falling back to the first 30 words of the
 content.
 
-= Built for the AI-native WordPress =
+= Callable by AI clients, on WordPress 6.9 and newer =
 
-On WordPress 7 the plugin registers three abilities through the Abilities API,
-which any connected AI client can call: reading `llms.txt`, reading a site
-summary, and triggering a regeneration. The last one requires `manage_options`;
-the other two require `read`.
+Where the Abilities API is available, the plugin registers three abilities any
+connected AI client can call: reading `llms.txt`, reading a site summary, and
+triggering a regeneration. The last one requires `manage_options`; the other two
+require `read`.
+
+This is the plugin being read, not the plugin calling out. It consumes no AI
+provider and needs no connector, no API key and no credit — everything else it
+does works identically on WordPress 6.7.
 
 = For developers =
 

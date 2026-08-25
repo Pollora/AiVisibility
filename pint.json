@@ -3,7 +3,8 @@
     "exclude": [
         "vendor",
         "build",
-        "node_modules"
+        "node_modules",
+        "languages"
     ],
     "rules": {
         "blank_line_after_opening_tag": false,

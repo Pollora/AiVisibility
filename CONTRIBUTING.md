@@ -120,7 +120,20 @@ routing all follow. There should be no second list anywhere.
 2. Bump `Version:` in the `ai-visibility.php` header **and** the `VERSION`
    constant below it. `DistributionTest` fails if they disagree, or if either
    disagrees with the changelog.
-3. Tag `vX.Y.Z` and push it.
+3. Regenerate the translation template — its `Project-Id-Version` header
+   carries the plugin version, so a bump alone puts it out of date and CI's
+   drift check fails on a tree that `composer qa` calls clean:
+
+   ```bash
+   wp i18n make-pot . languages/ai-visibility.pot \
+     --slug=ai-visibility --domain=ai-visibility \
+     --exclude=vendor,tests,build,node_modules \
+     --headers='{"Report-Msgid-Bugs-To":"https://github.com/Pollora/AiVisibility/issues","Last-Translator":"Pollora","Language-Team":"Pollora"}'
+   ```
+
+   The `.po` files are left alone: their `Project-Id-Version` records the
+   version each translation was made against, and only a retranslation moves it.
+4. Tag `vX.Y.Z` and push it.
 
 The release workflow re-runs the whole gate on the tagged tree, refuses to build
 if the tag does not match the plugin header, builds the zip from `git archive`

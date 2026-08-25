@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: AI Visibility 1.0.0\n"
+"Project-Id-Version: AI Visibility 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Pollora/AiVisibility/issues\n"
 "Last-Translator: Pollora\n"
 "Language-Team: Pollora\n"

@@ -118,6 +118,7 @@ describe('handleRegenerate', function (): void {
 
 describe('enqueueAssets', function (): void {
     it('loads nothing outside its own settings screen', function (string $hook): void {
+        Functions\expect('wp_enqueue_style')->never();
         Functions\expect('wp_enqueue_script')->never();
 
         $this->page->enqueueAssets($hook);
@@ -127,6 +128,7 @@ describe('enqueueAssets', function (): void {
         Functions\when('plugins_url')->justReturn('https://example.test/plugin/assets/admin.js');
         Functions\when('admin_url')->justReturn('https://example.test/wp-admin/admin-ajax.php');
         Functions\when('wp_create_nonce')->justReturn('a-nonce');
+        Functions\expect('wp_enqueue_style')->once();
         Functions\expect('wp_enqueue_script')->once();
         Functions\expect('wp_localize_script')
             ->once()
@@ -141,149 +143,196 @@ describe('enqueueAssets', function (): void {
     });
 });
 
-describe('field rendering', function (): void {
-    beforeEach(function (): void {
-        Functions\when('get_post_types')->justReturn([
-            'post' => new WP_Post_Type('post', 'Post', 'Posts'),
-            'page' => new WP_Post_Type('page', 'Page', 'Pages'),
-            'attachment' => new WP_Post_Type('attachment', 'Media', 'Media'),
-        ]);
+describe('panels', function (): void {
+    it('lists the panels in navigation order', function (): void {
+        expect(array_keys(SettingsPage::panels()))
+            ->toBe(['dashboard', 'discovery', 'content', 'crawlers', 'identity']);
     });
 
-    /** Capture what a renderer echoes. */
-    function render(callable $renderer): string
-    {
-        ob_start();
-        $renderer();
-
-        return (string) ob_get_clean();
-    }
-
-    it('names every field under the plugin option, so nothing else is overwritten', function (string $method): void {
-        $html = render(fn () => $this->page->{$method}());
-
-        expect($html)->toContain('name="ai_visibility_settings[');
-    })->with(['renderSiteDescription', 'renderPostTypes', 'renderPostsPerType', 'renderEmail', 'renderSocials']);
-
-    it('escapes a stored description instead of echoing markup', function (): void {
-        $this->setSettings(['site_description' => '</textarea><script>alert(1)</script>']);
-
-        $html = render(fn () => $this->page->renderSiteDescription());
-
-        expect($html)->not->toContain('<script>')
-            ->and($html)->not->toContain('</textarea><script')
-            ->and($html)->toContain('&lt;script&gt;');
+    it('opens on the dashboard when no panel is requested', function (): void {
+        expect(SettingsPage::activePanel())->toBe('dashboard');
     });
 
-    it('escapes stored crawler names', function (): void {
-        $this->setSettings(['crawlers_allow' => ['<script>alert(1)</script>']]);
+    it('honours a requested panel, so a reload comes back to it', function (string $panel): void {
+        $_GET['tab'] = $panel;
 
-        $html = render(fn () => $this->page->renderSocials());
+        expect(SettingsPage::activePanel())->toBe($panel);
+    })->with(['discovery', 'content', 'crawlers', 'identity']);
 
-        expect($html)->not->toContain('<script>');
+    it('refuses anything that is not a panel', function (mixed $requested): void {
+        $_GET['tab'] = $requested;
+
+        expect(SettingsPage::activePanel())->toBe('dashboard');
+    })->with([
+        'unknown name' => ['nope'],
+        'markup' => ['"><script>alert(1)</script>'],
+        'path traversal' => ['../../wp-config.php'],
+        'an array' => [['discovery']],
+        'empty' => [''],
+    ]);
+
+    it('builds a URL per panel', function (): void {
+        Functions\when('admin_url')->alias(
+            static fn (string $path): string => 'https://example.test/wp-admin/' . $path,
+        );
+
+        expect(SettingsPage::url())->toBe('https://example.test/wp-admin/options-general.php?page=ai-visibility')
+            ->and(SettingsPage::url('crawlers'))->toContain('&tab=crawlers');
     });
 
-    it('offers every public post type except attachments', function (): void {
-        $html = render(fn () => $this->page->renderPostTypes());
-
-        expect($html)->toContain('value="post"')
-            ->toContain('value="page"')
-            ->not->toContain('value="attachment"');
-    });
-
-    it('ticks the post types currently selected', function (): void {
-        $this->setSettings(['post_types' => ['page']]);
-
-        $html = render(fn () => $this->page->renderPostTypes());
-        $pageCheckbox = substr($html, (int) strpos($html, 'value="page"'), 80);
-
-        expect($pageCheckbox)->toContain('checked');
-    });
-
-    it('bounds the posts-per-type input in the markup, not only on save', function (): void {
-        $html = render(fn () => $this->page->renderPostsPerType());
-
-        expect($html)->toContain('type="number"')
-            ->toContain('min="1"')
-            ->toContain('max="200"');
-    });
-
-    it('falls back to the admin email when no contact is configured', function (): void {
-        $this->setOption('admin_email', 'admin@example.test');
-
-        expect(render(fn () => $this->page->renderEmail()))->toContain('value="admin@example.test"');
-    });
-
-    it('prefers the configured contact over the admin email', function (): void {
-        $this->setOption('admin_email', 'admin@example.test');
-        $this->setSettings(['identity_email' => 'contact@example.test']);
-
-        expect(render(fn () => $this->page->renderEmail()))->toContain('value="contact@example.test"');
-    });
-
-    it('lists social links one per line', function (): void {
-        $this->setSettings(['identity_socials' => ['https://example.test/a', 'https://example.test/b']]);
-
-        expect(render(fn () => $this->page->renderSocials()))
-            ->toContain("https://example.test/a\nhttps://example.test/b");
+    afterEach(function (): void {
+        unset($_GET['tab']);
     });
 });
 
-describe('registerSettings', function (): void {
-    it('registers the option with its sanitiser, so nothing reaches the database raw', function (): void {
-        Functions\when('add_settings_section')->justReturn(null);
-        Functions\when('add_settings_field')->justReturn(null);
-
-        $registered = [];
-        Functions\when('register_setting')->alias(static function (string $group, string $name, array $args) use (&$registered): void {
-            $registered = [$group, $name, $args];
-        });
-
-        $this->page->registerSettings();
-
-        expect($registered[1])->toBe('ai_visibility_settings')
-            ->and($registered[2]['sanitize_callback'])->toBeCallable()
-            ->and($registered[2]['default'])->toBe(Plugin::defaultSettings());
-    });
-
-    it('declares a field for every setting a user can change', function (): void {
-        Functions\when('register_setting')->justReturn(null);
-        Functions\when('add_settings_section')->justReturn(null);
-
-        $fields = [];
-        Functions\when('add_settings_field')->alias(static function (string $id) use (&$fields): void {
-            $fields[] = $id;
-        });
-
-        $this->page->registerSettings();
-
-        expect($fields)->toBe([
-            'enable_llms_txt',
-            'enable_markdown',
-            'enable_robots',
-            'enable_discovery',
-            'enable_abilities',
-            'site_description',
-            'post_types',
-            'posts_per_type',
-            'crawlers_allow',
-            'crawlers_block',
-            'identity_email',
-            'identity_socials',
+describe('render', function (): void {
+    beforeEach(function (): void {
+        Functions\when('settings_fields')->justReturn(null);
+        Functions\when('admin_url')->justReturn('https://example.test/wp-admin/options-general.php');
+        Functions\when('get_post_types')->justReturn([
+            'post' => new WP_Post_Type('post', 'Post', 'Posts'),
+            'attachment' => new WP_Post_Type('attachment', 'Media', 'Media'),
         ]);
+        Functions\when('wp_count_posts')->justReturn((object) ['publish' => 4]);
+        Functions\when('number_format_i18n')->alias(static fn ($n) => (string) $n);
+        Functions\when('_n')->alias(static fn ($single, $plural, $count) => $count === 1 ? $single : $plural);
+        Functions\when('wp_upload_dir')->justReturn(['error' => false, 'basedir' => sys_get_temp_dir()]);
+        Functions\when('wp_mkdir_p')->justReturn(true);
+        Functions\when('size_format')->alias(static fn ($b) => $b . ' B');
+
+        $this->markup = function (): string {
+            ob_start();
+            $this->page->render();
+
+            return (string) ob_get_clean();
+        };
     });
 
-    it('exposes exactly the settings the shape declares', function (): void {
-        Functions\when('register_setting')->justReturn(null);
-        Functions\when('add_settings_section')->justReturn(null);
+    it('renders every panel, so saving one never wipes the others', function (): void {
+        // A field that is not in the DOM is not submitted, and sanitize()
+        // rebuilds the whole option from what was posted. Rendering only the
+        // active panel would silently reset every setting on the other four.
+        $markup = ($this->markup)();
 
-        $fields = [];
-        Functions\when('add_settings_field')->alias(static function (string $id) use (&$fields): void {
-            $fields[] = $id;
-        });
+        foreach (array_keys(SettingsPage::panels()) as $panel) {
+            expect($markup)->toContain('id="aivis-panel-' . $panel . '"');
+        }
+    });
 
-        $this->page->registerSettings();
+    it('carries an input for every stored setting', function (): void {
+        $markup = ($this->markup)();
 
-        expect($fields)->toBe(array_keys(Plugin::defaultSettings()));
-    })->skip('Field order follows the screen layout, not the settings array.');
+        foreach (array_keys(Plugin::defaultSettings()) as $key) {
+            expect($markup)->toContain('ai_visibility_settings[' . $key . ']');
+        }
+    });
+
+    it('shows only the requested panel', function (): void {
+        $_GET['tab'] = 'crawlers';
+
+        $markup = ($this->markup)();
+
+        expect($markup)->toContain('id="aivis-panel-crawlers" role="tabpanel" aria-labelledby="aivis-tab-crawlers" tabindex="0">')
+            ->and($markup)->toContain('id="aivis-panel-content" role="tabpanel" aria-labelledby="aivis-tab-content" tabindex="0" hidden>');
+    });
+
+    it('marks the requested tab as selected and the rest as not', function (): void {
+        $_GET['tab'] = 'identity';
+
+        $markup = ($this->markup)();
+
+        expect(substr_count($markup, 'aria-selected="true"'))->toBe(1)
+            ->and($markup)->toContain('id="aivis-tab-identity" aria-controls="aivis-panel-identity" aria-selected="true"');
+    });
+
+    it('navigates with links, so the panels work without JavaScript', function (): void {
+        $markup = ($this->markup)();
+
+        foreach (array_keys(SettingsPage::panels()) as $panel) {
+            expect($markup)->toContain('tab=' . $panel);
+        }
+
+        expect($markup)->toContain('<a role="tab"');
+    });
+
+    it('hides the save bar on the dashboard and shows it elsewhere', function (): void {
+        expect(($this->markup)())->toContain('<div class="aivis__savebar" hidden>');
+
+        $_GET['tab'] = 'discovery';
+
+        expect(($this->markup)())->toContain('<div class="aivis__savebar">');
+    });
+
+    it('posts to options.php so WordPress handles the nonce and the option', function (): void {
+        expect(($this->markup)())->toContain('<form method="post" action="options.php"');
+    });
+
+    it('never offers attachments as a publishable post type', function (): void {
+        expect(($this->markup)())->toContain('value="post"')->not->toContain('value="attachment"');
+    });
+
+    afterEach(function (): void {
+        unset($_GET['tab']);
+    });
+});
+
+describe('navigation', function (): void {
+    beforeEach(function (): void {
+        Functions\when('settings_fields')->justReturn(null);
+        Functions\when('admin_url')->justReturn('https://example.test/wp-admin/options-general.php');
+        Functions\when('get_post_types')->justReturn([]);
+        Functions\when('wp_upload_dir')->justReturn(['error' => false, 'basedir' => sys_get_temp_dir()]);
+        Functions\when('wp_mkdir_p')->justReturn(true);
+        Functions\when('size_format')->alias(static fn ($b) => $b . ' B');
+
+        ob_start();
+        $this->page->render();
+        $this->markup = (string) ob_get_clean();
+    });
+
+    it('gives every panel a label and a description', function (): void {
+        foreach (SettingsPage::panels() as $panel) {
+            expect($panel['label'])->not->toBe('')
+                ->and($panel['description'])->not->toBe('');
+        }
+    });
+
+    it('shows both the label and the description in the sidebar', function (): void {
+        foreach (SettingsPage::panels() as $panel) {
+            expect($this->markup)->toContain('>' . $panel['label'] . '<')
+                ->and($this->markup)->toContain('>' . $panel['description'] . '<');
+        }
+    });
+
+    it('draws one icon per panel', function (): void {
+        expect(substr_count($this->markup, 'class="aivis__navicon"'))
+            ->toBe(count(SettingsPage::panels()));
+    });
+
+    it('hides the icons from assistive technology, since the label says it', function (): void {
+        preg_match_all('/<svg class="aivis__navicon"[^>]*>/', $this->markup, $icons);
+
+        foreach ($icons[0] as $icon) {
+            expect($icon)->toContain('aria-hidden="true"')->toContain('focusable="false"');
+        }
+    });
+
+    it('ships the icons inline rather than fetching them', function (): void {
+        // An icon font or a remote sprite would be an outbound request from
+        // wp-admin, which this plugin does not make anywhere.
+        expect($this->markup)->toContain('<svg')
+            ->not->toContain('<img')
+            ->not->toContain('http://fonts.')
+            ->not->toContain('https://fonts.');
+    });
+
+    it('tells WordPress where to put its notices', function (): void {
+        // Without this marker WordPress injects "Settings saved." after the
+        // first heading, which lands in the middle of the masthead.
+        expect($this->markup)->toContain('<hr class="wp-header-end">');
+    });
+
+    it('wraps the screen in a single surface', function (): void {
+        expect($this->markup)->toContain('<div class="aivis__shell">');
+    });
 });

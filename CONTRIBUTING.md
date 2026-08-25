@@ -59,7 +59,7 @@ composer test:coverage              # with coverage, enforcing the minimum
 
 ### Coverage
 
-The threshold is 78%, a few points below what the suite actually reaches, so it
+The threshold is 85%, a few points below what the suite actually reaches, so it
 ratchets rather than tripping on a single new line.
 
 It will not go much higher, and that is deliberate. The uncovered lines are

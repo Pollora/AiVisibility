@@ -1,0 +1,1020 @@
+/* Hallmark · component: admin-settings-screen · genre: modern-minimal · theme: custom (indigo)
+ * states: default · hover · focus · active · disabled · loading · error · success
+ * contrast: pass — ink 12:1, ink-2 7:1, ink-3 4.6:1, accent 7:1 on paper
+ * pre-emit critique: P5 H5 E4 S5 R5 V4
+ *
+ * Scoped entirely to .aivis so nothing leaks into the rest of wp-admin.
+ * No web font: an external request from wp-admin would contradict the plugin's
+ * own no-outbound-request rule. Hierarchy comes from weight, size and tracking
+ * on the system stack.
+ */
+
+.aivis {
+	/* Paper and ink */
+	--aivis-paper: oklch(100% 0 0);
+	--aivis-paper-2: oklch(97.6% 0.004 264);
+	--aivis-paper-3: oklch(95.4% 0.007 264);
+	--aivis-ink: oklch(24% 0.021 264);
+	--aivis-ink-2: oklch(45% 0.016 264);
+	--aivis-ink-3: oklch(58% 0.014 264);
+	--aivis-line: oklch(91% 0.007 264);
+	--aivis-line-2: oklch(85% 0.010 264);
+
+	/* Accent */
+	--aivis-accent: oklch(52% 0.19 264);
+	--aivis-accent-hover: oklch(45% 0.19 264);
+	--aivis-accent-soft: oklch(96.5% 0.024 264);
+	--aivis-accent-line: oklch(84% 0.075 264);
+
+	/* Status */
+	--aivis-pass: oklch(56% 0.13 155);
+	--aivis-pass-soft: oklch(96% 0.035 155);
+	--aivis-warn: oklch(64% 0.14 75);
+	--aivis-warn-soft: oklch(96.5% 0.045 85);
+	--aivis-fail: oklch(55% 0.20 27);
+	--aivis-fail-soft: oklch(96.5% 0.035 27);
+
+	/* Type */
+	--aivis-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	--aivis-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+	--aivis-text-xs: 11px;
+	--aivis-text-sm: 12px;
+	--aivis-text-base: 13px;
+	--aivis-text-md: 14px;
+	--aivis-text-lg: 17px;
+	--aivis-text-xl: 22px;
+	--aivis-text-2xl: 27px;
+
+	/* 4pt spacing scale */
+	--aivis-space-1: 4px;
+	--aivis-space-2: 8px;
+	--aivis-space-3: 12px;
+	--aivis-space-4: 16px;
+	--aivis-space-5: 20px;
+	--aivis-space-6: 24px;
+	--aivis-space-8: 32px;
+	--aivis-space-10: 40px;
+
+	--aivis-radius: 8px;
+	--aivis-radius-sm: 5px;
+	--aivis-radius-pill: 999px;
+
+	--aivis-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	--aivis-dur: 140ms;
+
+	max-width: 1180px;
+	margin-right: var(--aivis-space-5);
+	color: var(--aivis-ink);
+	font-family: var(--aivis-font);
+	font-size: var(--aivis-text-base);
+	line-height: 1.55;
+}
+
+.aivis *,
+.aivis *::before,
+.aivis *::after {
+	box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------- masthead */
+
+.aivis__masthead {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: var(--aivis-space-4);
+	padding: var(--aivis-space-5) var(--aivis-space-6);
+	border-bottom: 1px solid var(--aivis-line);
+	background: var(--aivis-paper);
+}
+
+.aivis__title {
+	margin: 0;
+	padding: 0;
+	color: var(--aivis-ink);
+	font-size: var(--aivis-text-2xl);
+	font-weight: 620;
+	font-style: normal;
+	letter-spacing: -0.021em;
+	line-height: 1.15;
+}
+
+.aivis__tagline {
+	max-width: 62ch;
+	margin: var(--aivis-space-1) 0 0;
+	color: var(--aivis-ink-2);
+	font-size: var(--aivis-text-md);
+}
+
+.aivis__meta {
+	display: flex;
+	align-items: center;
+	gap: var(--aivis-space-3);
+}
+
+.aivis__version {
+	color: var(--aivis-ink-3);
+	font-family: var(--aivis-mono);
+	font-size: var(--aivis-text-sm);
+	font-variant-numeric: tabular-nums;
+}
+
+.aivis-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--aivis-space-2);
+	padding: var(--aivis-space-1) var(--aivis-space-3);
+	border: 1px solid transparent;
+	border-radius: var(--aivis-radius-pill);
+	font-size: var(--aivis-text-sm);
+	font-weight: 560;
+	letter-spacing: -0.005em;
+	white-space: nowrap;
+}
+
+.aivis-pill::before {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: currentColor;
+	content: "";
+}
+
+.aivis-pill--pass {
+	border-color: color-mix(in oklch, var(--aivis-pass) 26%, transparent);
+	background: var(--aivis-pass-soft);
+	color: var(--aivis-pass);
+}
+
+.aivis-pill--warn {
+	border-color: color-mix(in oklch, var(--aivis-warn) 32%, transparent);
+	background: var(--aivis-warn-soft);
+	color: oklch(48% 0.11 75);
+}
+
+.aivis-pill--fail {
+	border-color: color-mix(in oklch, var(--aivis-fail) 26%, transparent);
+	background: var(--aivis-fail-soft);
+	color: var(--aivis-fail);
+}
+
+/* ----------------------------------------------------------------- notices */
+
+/* WordPress drops its own notices in after .wp-header-end. Sit them flush
+   inside the shell so a saved-settings message reads as part of the screen
+   rather than something pasted over it. */
+.aivis .notice,
+.aivis div.error,
+.aivis div.updated {
+	margin: 0;
+	border: 0;
+	border-bottom: 1px solid var(--aivis-line);
+	border-left: 3px solid var(--aivis-accent);
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.aivis .notice-success {
+	border-left-color: var(--aivis-pass);
+}
+
+.aivis .notice-error {
+	border-left-color: var(--aivis-fail);
+}
+
+.aivis .notice-warning {
+	border-left-color: var(--aivis-warn);
+}
+
+/* -------------------------------------------------------------------- body */
+
+/* The surface the whole screen sits on. Without it the panels float directly
+   on the admin's grey and the screen reads as unfinished. */
+.aivis__shell {
+	margin-top: var(--aivis-space-4);
+	border: 1px solid var(--aivis-line);
+	border-radius: 12px;
+	background: var(--aivis-paper);
+	box-shadow: 0 1px 2px oklch(24% 0.02 264 / 0.04), 0 8px 24px -16px oklch(24% 0.02 264 / 0.18);
+	overflow: hidden;
+}
+
+.aivis__body {
+	display: grid;
+	grid-template-columns: 258px minmax(0, 1fr);
+	align-items: stretch;
+}
+
+/* ---------------------------------------------------------------------- nav */
+
+.aivis__nav {
+	padding: var(--aivis-space-3);
+	border-right: 1px solid var(--aivis-line);
+	background: var(--aivis-paper-2);
+}
+
+.aivis__navlist {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.aivis__navrow {
+	margin: 0;
+}
+
+.aivis__navitem {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--aivis-space-3);
+	width: 100%;
+	padding: var(--aivis-space-3);
+	border: 0;
+	border-radius: var(--aivis-radius);
+	background: transparent;
+	color: var(--aivis-ink-2);
+	font-family: inherit;
+	text-align: left;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background var(--aivis-dur) var(--aivis-ease-out), color var(--aivis-dur) var(--aivis-ease-out);
+}
+
+.aivis__navicon {
+	flex: none;
+	margin-top: 1px;
+	color: var(--aivis-ink-3);
+	transition: color var(--aivis-dur) var(--aivis-ease-out);
+}
+
+.aivis__navtext {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	min-width: 0;
+}
+
+.aivis__navlabel {
+	color: var(--aivis-ink);
+	font-size: var(--aivis-text-md);
+	font-weight: 560;
+	letter-spacing: -0.006em;
+	overflow-wrap: anywhere;
+}
+
+.aivis__navdesc {
+	color: var(--aivis-ink-3);
+	font-size: var(--aivis-text-sm);
+	line-height: 1.35;
+	overflow-wrap: anywhere;
+}
+
+.aivis__navitem:hover,
+.aivis__navitem.is-hover {
+	background: var(--aivis-paper-3);
+}
+
+.aivis__navitem:hover .aivis__navicon,
+.aivis__navitem.is-hover .aivis__navicon {
+	color: var(--aivis-ink-2);
+}
+
+.aivis__navitem:focus-visible,
+.aivis__navitem.is-focus {
+	outline: 2px solid var(--aivis-accent);
+	outline-offset: -1px;
+}
+
+.aivis__navitem:active,
+.aivis__navitem.is-active {
+	background: var(--aivis-line);
+}
+
+.aivis__navitem[aria-selected="true"] {
+	background: var(--aivis-paper);
+	box-shadow: inset 0 0 0 1px var(--aivis-accent-line);
+}
+
+.aivis__navitem[aria-selected="true"] .aivis__navicon,
+.aivis__navitem[aria-selected="true"] .aivis__navlabel {
+	color: var(--aivis-accent);
+}
+
+.aivis__navitem[aria-selected="true"] .aivis__navlabel {
+	font-weight: 620;
+}
+
+/* ------------------------------------------------------------------ panels */
+
+.aivis__panels {
+	min-width: 0;
+	padding: var(--aivis-space-6);
+}
+
+.aivis__panel[hidden] {
+	display: none;
+}
+
+.aivis__panel:focus-visible {
+	outline: 2px solid var(--aivis-accent);
+	outline-offset: 4px;
+}
+
+.aivis__panelhead {
+	margin-bottom: var(--aivis-space-6);
+}
+
+.aivis__panetitle {
+	margin: 0;
+	padding: 0;
+	color: var(--aivis-ink);
+	font-size: var(--aivis-text-xl);
+	font-weight: 600;
+	font-style: normal;
+	letter-spacing: -0.017em;
+	line-height: 1.2;
+}
+
+.aivis__paneintro {
+	max-width: 68ch;
+	margin: var(--aivis-space-2) 0 0;
+	color: var(--aivis-ink-2);
+	font-size: var(--aivis-text-md);
+}
+
+.aivis-subhead {
+	margin: var(--aivis-space-8) 0 var(--aivis-space-3);
+	color: var(--aivis-ink);
+	font-size: var(--aivis-text-md);
+	font-weight: 620;
+	font-style: normal;
+	letter-spacing: -0.008em;
+}
+
+.aivis-note {
+	max-width: 72ch;
+	margin: var(--aivis-space-5) 0 0;
+	padding-left: var(--aivis-space-3);
+	border-left: 2px solid var(--aivis-line-2);
+	color: var(--aivis-ink-3);
+	font-size: var(--aivis-text-base);
+}
+
+/* ------------------------------------------------------------- file cards */
+
+.aivis-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+	gap: var(--aivis-space-3);
+}
+
+.aivis-file {
+	display: flex;
+	flex-direction: column;
+	padding: var(--aivis-space-4);
+	border: 1px solid var(--aivis-line);
+	border-radius: var(--aivis-radius);
+	background: var(--aivis-paper);
+}
+
+.aivis-file.is-missing {
+	background: var(--aivis-paper-2);
+	border-style: dashed;
+}
+
+.aivis-file__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--aivis-space-2);
+}
+
+.aivis-file__name {
+	margin: 0;
+	padding: 0;
+	overflow-wrap: anywhere;
+	min-width: 0;
+	color: var(--aivis-ink);
+	font-family: var(--aivis-mono);
+	font-size: var(--aivis-text-base);
+	font-weight: 600;
+	font-style: normal;
+}
+
+.aivis-file__stats {
+	display: flex;
+	gap: var(--aivis-space-5);
+	margin: var(--aivis-space-4) 0 0;
+}
+
+.aivis-file__stats div {
+	min-width: 0;
+}
+
+.aivis-file__stats dt {
+	margin: 0;
+	color: var(--aivis-ink-3);
+	font-size: var(--aivis-text-xs);
+	font-weight: 500;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.aivis-file__stats dd {
+	margin: 2px 0 0;
+	color: var(--aivis-ink);
+	font-size: var(--aivis-text-base);
+	font-variant-numeric: tabular-nums;
+}
+
+.aivis-file__foot {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--aivis-space-2);
+	margin-top: var(--aivis-space-4);
+	padding-top: var(--aivis-space-3);
+	border-top: 1px solid var(--aivis-line);
+}
+
+/* ------------------------------------------------------------------ checks */
+
+.aivis-checks {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	margin: 0;
+	padding: 0;
+	border: 1px solid var(--aivis-line);
+	border-radius: var(--aivis-radius);
+	list-style: none;
+	overflow: hidden;
+}
+
+.aivis-check {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--aivis-space-3);
+	margin: 0;
+	padding: var(--aivis-space-3) var(--aivis-space-4);
+	border-top: 1px solid var(--aivis-line);
+}
+
+.aivis-check:first-child {
+	border-top: 0;
+}
+
+.aivis-check--fail {
+	background: var(--aivis-fail-soft);
+}
+
+.aivis-check--warn {
+	background: var(--aivis-warn-soft);
+}
+
+.aivis-check__body {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2px var(--aivis-space-3);
+	min-width: 0;
+}
+
+.aivis-check__label {
+	color: var(--aivis-ink);
+	font-weight: 560;
+}
+
+.aivis-check__detail {
+	color: var(--aivis-ink-2);
+	overflow-wrap: anywhere;
+}
+
+.aivis-dot {
+	flex: none;
+	width: 8px;
+	height: 8px;
+	margin-top: 7px;
+	border-radius: 50%;
+	background: var(--aivis-ink-3);
+}
+
+.aivis-dot--pass {
+	background: var(--aivis-pass);
+}
+
+.aivis-dot--warn {
+	background: var(--aivis-warn);
+}
+
+.aivis-dot--fail {
+	background: var(--aivis-fail);
+}
+
+/* ----------------------------------------------------------------- actions */
+
+.aivis-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--aivis-space-3);
+	margin-top: var(--aivis-space-6);
+}
+
+.aivis-actions__status {
+	color: var(--aivis-ink-2);
+	font-size: var(--aivis-text-base);
+}
+
+.aivis-actions__status[data-state="error"] {
+	color: var(--aivis-fail);
+	font-weight: 560;
+}
+
+.aivis-actions__status[data-state="success"] {
+	color: var(--aivis-pass);
+	font-weight: 560;
+}
+
+/* ----------------------------------------------------------------- buttons */
+
+.aivis-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--aivis-space-2);
+	min-height: 34px;
+	padding: 0 var(--aivis-space-4);
+	border: 1px solid transparent;
+	border-radius: var(--aivis-radius-sm);
+	font-family: inherit;
+	font-size: var(--aivis-text-md);
+	font-weight: 560;
+	line-height: 1;
+	white-space: nowrap;
+	cursor: pointer;
+	transition: background var(--aivis-dur) var(--aivis-ease-out), border-color var(--aivis-dur) var(--aivis-ease-out);
+}
+
+.aivis-button--primary {
+	background: var(--aivis-accent);
+	color: oklch(100% 0 0);
+}
+
+.aivis-button--primary:hover,
+.aivis-button--primary.is-hover {
+	background: var(--aivis-accent-hover);
+}
+
+.aivis-button--primary:active,
+.aivis-button--primary.is-active {
+	background: var(--aivis-accent-hover);
+	transform: translateY(1px);
+}
+
+.aivis-button--quiet {
+	border-color: var(--aivis-line-2);
+	background: var(--aivis-paper);
+	color: var(--aivis-ink-2);
+	min-height: 28px;
+	padding: 0 var(--aivis-space-3);
+	font-size: var(--aivis-text-base);
+}
+
+.aivis-button--quiet:hover,
+.aivis-button--quiet.is-hover {
+	border-color: var(--aivis-ink-3);
+	background: var(--aivis-paper-3);
+	color: var(--aivis-ink);
+}
+
+.aivis-button--quiet:active,
+.aivis-button--quiet.is-active {
+	background: var(--aivis-line);
+}
+
+.aivis-button:focus-visible,
+.aivis-button.is-focus {
+	outline: 2px solid var(--aivis-accent);
+	outline-offset: 2px;
+}
+
+.aivis-button[disabled],
+.aivis-button.is-disabled {
+	opacity: 0.55;
+	cursor: not-allowed;
+	transform: none;
+}
+
+.aivis-button[data-state="loading"] {
+	cursor: progress;
+}
+
+.aivis-button[data-state="loading"]::before {
+	width: 12px;
+	height: 12px;
+	border: 2px solid currentColor;
+	border-right-color: transparent;
+	border-radius: 50%;
+	animation: aivis-spin 640ms linear infinite;
+	content: "";
+}
+
+@keyframes aivis-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.aivis-link {
+	color: var(--aivis-accent);
+	font-weight: 560;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.aivis-link:hover,
+.aivis-link.is-hover {
+	color: var(--aivis-accent-hover);
+}
+
+.aivis-link:focus-visible,
+.aivis-link.is-focus {
+	outline: 2px solid var(--aivis-accent);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+/* ----------------------------------------------------------------- toggles */
+
+.aivis-stack {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--aivis-line);
+	border-radius: var(--aivis-radius);
+	overflow: hidden;
+}
+
+.aivis-toggle {
+	position: relative;
+	border-top: 1px solid var(--aivis-line);
+}
+
+.aivis-toggle:first-child {
+	border-top: 0;
+}
+
+.aivis-toggle__input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.aivis-toggle__label {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--aivis-space-4);
+	padding: var(--aivis-space-4);
+	cursor: pointer;
+	transition: background var(--aivis-dur) var(--aivis-ease-out);
+}
+
+.aivis-toggle__label:hover,
+.aivis-toggle.is-hover .aivis-toggle__label {
+	background: var(--aivis-paper-2);
+}
+
+.aivis-toggle__input:focus-visible + .aivis-toggle__label,
+.aivis-toggle.is-focus .aivis-toggle__label {
+	outline: 2px solid var(--aivis-accent);
+	outline-offset: -2px;
+}
+
+.aivis-toggle__input:disabled + .aivis-toggle__label {
+	opacity: 0.55;
+	cursor: not-allowed;
+}
+
+.aivis-toggle__track {
+	position: relative;
+	flex: none;
+	width: 38px;
+	height: 22px;
+	margin-top: 1px;
+	border-radius: var(--aivis-radius-pill);
+	background: var(--aivis-line-2);
+	transition: background var(--aivis-dur) var(--aivis-ease-out);
+}
+
+.aivis-toggle__knob {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: var(--aivis-paper);
+	box-shadow: 0 1px 2px oklch(24% 0.02 264 / 0.28);
+	transition: transform var(--aivis-dur) var(--aivis-ease-out);
+}
+
+.aivis-toggle__input:checked + .aivis-toggle__label .aivis-toggle__track {
+	background: var(--aivis-accent);
+}
+
+.aivis-toggle__input:checked + .aivis-toggle__label .aivis-toggle__knob {
+	transform: translateX(16px);
+}
+
+.aivis-toggle__input:active + .aivis-toggle__label .aivis-toggle__knob {
+	width: 19px;
+}
+
+.aivis-toggle__text {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.aivis-toggle__title {
+	color: var(--aivis-ink);
+	font-size: var(--aivis-text-md);
+	font-weight: 560;
+	overflow-wrap: anywhere;
+}
+
+.aivis-toggle__help {
+	max-width: 72ch;
+	color: var(--aivis-ink-2);
+	font-size: var(--aivis-text-base);
+}
+
+/* ------------------------------------------------------------------ fields */
+
+.aivis-field {
+	margin-bottom: var(--aivis-space-6);
+}
+
+.aivis-field--narrow {
+	max-width: 320px;
+}
+
+.aivis-field__label {
+	display: block;
+	margin-bottom: var(--aivis-space-2);
+	color: var(--aivis-ink);
+	font-size: var(--aivis-text-md);
+	font-weight: 560;
+}
+
+.aivis-field__control {
+	display: block;
+	width: 100%;
+	max-width: 640px;
+	padding: var(--aivis-space-2) var(--aivis-space-3);
+	border: 1px solid var(--aivis-line-2);
+	border-radius: var(--aivis-radius-sm);
+	background: var(--aivis-paper);
+	color: var(--aivis-ink);
+	font-family: inherit;
+	font-size: var(--aivis-text-md);
+	line-height: 1.5;
+	transition: border-color var(--aivis-dur) var(--aivis-ease-out), box-shadow var(--aivis-dur) var(--aivis-ease-out);
+}
+
+.aivis-field__control--area {
+	max-width: 720px;
+	font-family: var(--aivis-mono);
+	font-size: var(--aivis-text-base);
+	resize: vertical;
+}
+
+.aivis-field__control--number {
+	max-width: 120px;
+	font-variant-numeric: tabular-nums;
+}
+
+.aivis-field__control:hover,
+.aivis-field__control.is-hover {
+	border-color: var(--aivis-ink-3);
+}
+
+.aivis-field__control:focus,
+.aivis-field__control:focus-visible,
+.aivis-field__control.is-focus {
+	outline: none;
+	border-color: var(--aivis-accent);
+	box-shadow: 0 0 0 3px var(--aivis-accent-soft);
+}
+
+.aivis-field__control:disabled,
+.aivis-field__control.is-disabled {
+	background: var(--aivis-paper-3);
+	color: var(--aivis-ink-3);
+	cursor: not-allowed;
+}
+
+.aivis-field__control[aria-invalid="true"] {
+	border-color: var(--aivis-fail);
+}
+
+.aivis-field__control::placeholder {
+	color: var(--aivis-ink-3);
+	opacity: 1;
+}
+
+.aivis-field__help {
+	max-width: 640px;
+	margin: var(--aivis-space-2) 0 0;
+	color: var(--aivis-ink-2);
+	font-size: var(--aivis-text-base);
+}
+
+.aivis-columns {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+	gap: var(--aivis-space-6);
+}
+
+/* ------------------------------------------------------------- type cards */
+
+.aivis-typegrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr));
+	gap: var(--aivis-space-2);
+	margin-top: var(--aivis-space-3);
+}
+
+.aivis-card-check {
+	position: relative;
+	min-width: 0;
+}
+
+.aivis-card-check__input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: 0;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.aivis-card-check__label {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+	padding: var(--aivis-space-3);
+	border: 1px solid var(--aivis-line-2);
+	border-radius: var(--aivis-radius-sm);
+	background: var(--aivis-paper);
+	cursor: pointer;
+	transition: border-color var(--aivis-dur) var(--aivis-ease-out), background var(--aivis-dur) var(--aivis-ease-out);
+}
+
+.aivis-card-check__label:hover,
+.aivis-card-check.is-hover .aivis-card-check__label {
+	border-color: var(--aivis-ink-3);
+	background: var(--aivis-paper-2);
+}
+
+.aivis-card-check__input:focus-visible + .aivis-card-check__label,
+.aivis-card-check.is-focus .aivis-card-check__label {
+	outline: 2px solid var(--aivis-accent);
+	outline-offset: 1px;
+}
+
+.aivis-card-check__input:checked + .aivis-card-check__label {
+	border-color: var(--aivis-accent);
+	background: var(--aivis-accent-soft);
+	box-shadow: inset 0 0 0 1px var(--aivis-accent);
+}
+
+.aivis-card-check__input:disabled + .aivis-card-check__label {
+	opacity: 0.55;
+	cursor: not-allowed;
+}
+
+.aivis-card-check__name {
+	color: var(--aivis-ink);
+	font-size: var(--aivis-text-md);
+	font-weight: 560;
+	overflow-wrap: anywhere;
+}
+
+.aivis-card-check__slug {
+	padding: 0;
+	background: none;
+	color: var(--aivis-ink-2);
+	font-family: var(--aivis-mono);
+	font-size: var(--aivis-text-xs);
+	overflow-wrap: anywhere;
+}
+
+.aivis-card-check__count {
+	color: var(--aivis-ink-3);
+	font-size: var(--aivis-text-xs);
+	font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------- save bar */
+
+.aivis__savebar {
+	position: sticky;
+	bottom: 0;
+	z-index: 5;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--aivis-space-3);
+	margin-top: var(--aivis-space-8);
+	padding: var(--aivis-space-3) var(--aivis-space-4);
+	border: 1px solid var(--aivis-line);
+	border-radius: var(--aivis-radius);
+	background: color-mix(in oklch, var(--aivis-paper) 88%, transparent);
+	backdrop-filter: blur(8px);
+}
+
+.aivis__savebar[hidden] {
+	display: none;
+}
+
+.aivis__savenote {
+	margin: 0;
+	color: var(--aivis-ink-2);
+	font-size: var(--aivis-text-base);
+}
+
+/* --------------------------------------------------------------- responsive */
+
+@media (max-width: 782px) {
+	.aivis {
+		margin-right: 0;
+		font-size: var(--aivis-text-md);
+	}
+
+	.aivis__body {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.aivis__nav {
+		padding: var(--aivis-space-2);
+		border-right: 0;
+		border-bottom: 1px solid var(--aivis-line);
+		overflow-x: auto;
+		scrollbar-width: thin;
+	}
+
+	.aivis__navlist {
+		flex-direction: row;
+		gap: var(--aivis-space-1);
+		width: max-content;
+	}
+
+	.aivis__navitem {
+		align-items: center;
+		padding: var(--aivis-space-2) var(--aivis-space-3);
+		white-space: nowrap;
+	}
+
+	/* The descriptions do not survive a horizontal strip; the labels do. */
+	.aivis__navdesc {
+		display: none;
+	}
+
+	.aivis__panels {
+		padding: var(--aivis-space-4);
+	}
+
+	.aivis__masthead {
+		align-items: flex-start;
+		flex-direction: column;
+		padding: var(--aivis-space-4);
+	}
+
+	.aivis-file__stats {
+		gap: var(--aivis-space-4);
+	}
+}
+
+/* --------------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+	.aivis *,
+	.aivis *::before,
+	.aivis *::after {
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+	}
+}

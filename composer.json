@@ -74,7 +74,7 @@
         "sniff": "phpcs",
         "sniff:fix": "phpcbf",
         "test": "pest",
-        "test:coverage": "pest --coverage --min=78",
+        "test:coverage": "pest --coverage --min=85",
         "audit:deps": "@composer audit --locked --abandoned=report",
         "qa": [
             "@lint",

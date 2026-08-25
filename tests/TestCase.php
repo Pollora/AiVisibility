@@ -86,6 +86,7 @@ abstract class TestCase extends BaseTestCase
         Functions\when('esc_url')->alias(static fn ($t) => filter_var((string) $t, FILTER_SANITIZE_URL) ?: '');
         Functions\when('esc_url_raw')->alias(static fn ($t) => filter_var((string) $t, FILTER_SANITIZE_URL) ?: '');
         Functions\when('esc_html__')->alias(static fn ($t) => htmlspecialchars((string) $t, ENT_QUOTES, 'UTF-8'));
+        Functions\when('esc_attr__')->alias(static fn ($t) => htmlspecialchars((string) $t, ENT_QUOTES, 'UTF-8'));
         Functions\when('esc_html_e')->alias(static function ($t): void {
             echo htmlspecialchars((string) $t, ENT_QUOTES, 'UTF-8');
         });
@@ -98,6 +99,10 @@ abstract class TestCase extends BaseTestCase
         Functions\when('sanitize_email')->alias(
             static fn ($e) => filter_var((string) $e, FILTER_VALIDATE_EMAIL) ?: '',
         );
+        Functions\when('sanitize_key')->alias(
+            static fn ($k) => preg_replace('/[^a-z0-9_\-]/', '', strtolower((string) $k)) ?? '',
+        );
+        Functions\when('wp_unslash')->alias(static fn ($v) => is_string($v) ? stripslashes($v) : $v);
         Functions\when('sanitize_file_name')->alias(
             static fn ($n) => preg_replace('/[^A-Za-z0-9._-]/', '-', (string) $n) ?? '',
         );

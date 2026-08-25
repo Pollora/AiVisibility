@@ -9,6 +9,30 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Added
 
+- **Rebuilt settings screen.** The four stacked `form-table` sections are now
+  five panels behind a sidebar: Dashboard, Discovery, Content, AI crawlers,
+  Identity. Each nav entry carries an icon, a label and a one-line description,
+  and the whole screen sits in a single surface rather than floating on the
+  admin's grey.
+  - The panel is in the URL (`?tab=…`), so reloading, bookmarking, and the
+    redirect WordPress performs after saving all come back to the panel you
+    were on.
+  - The switcher is a list of real links and every panel is in the DOM, so the
+    screen still works with JavaScript disabled — and, more importantly, saving
+    from one panel can never wipe the settings on the other four.
+  - Switches are styled checkboxes, not scripted divs: they submit, they reach
+    the tab order, and a screen reader announces them correctly.
+  - Arrow keys, Home and End move between panels, per the ARIA tabs pattern.
+- **Health checks on the dashboard.** Five conditions that silently break the
+  plugin are now reported: plain permalinks (which make every endpoint 404), an
+  unwritable uploads directory, "discourage search engines" (which withholds the
+  robots.txt directives), missing generated files, and the availability of the
+  Abilities API. None of them were visible from the settings form before.
+- Each generated file is shown with its real size, its modification time in the
+  site's own date format, a link, and a copy-URL button.
+- No web font, no icon font, no sprite: the icons are inline SVG. An outbound
+  request from wp-admin would contradict the plugin's own no-network rule.
+
 - Quality pipeline: Pest test suite, PHPStan at level `max`, PHPCS (WordPress
   security, escaping, i18n and PHP compatibility rulesets), Laravel Pint, and a
   parallel syntax lint — all run on every push by GitHub Actions.

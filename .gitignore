@@ -12,3 +12,4 @@
 /phpunit.xml
 /phpstan.neon
 /phpcs.xml
+languages/*.l10n.php

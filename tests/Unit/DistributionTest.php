@@ -133,7 +133,7 @@ describe('composer metadata', function (): void {
 describe('shipped files', function () use ($root): void {
     it('marks development files as export-ignore so they stay out of the zip', function (string $path) use ($root): void {
         expect((string) file_get_contents($root . '/.gitattributes'))->toContain($path);
-    })->with(['tests', 'phpunit.xml.dist', 'phpstan.neon.dist', 'phpcs.xml.dist', 'pint.json', '.github']);
+    })->with(['tests', 'phpunit.xml.dist', 'phpstan.neon.dist', 'phpcs.xml.dist', 'pint.json', '.github', '.wordpress-org']);
 
     it('ships an index.php guard in every PHP directory', function (string $directory) use ($root): void {
         expect($root . '/' . $directory . '/index.php')->toBeReadableFile();

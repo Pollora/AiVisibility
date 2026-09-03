@@ -62,6 +62,12 @@ Download the zip from [the latest release][releases] and install it through
 composer require pollora/ai-visibility
 ```
 
+The package declares `"type": "wordpress-plugin"`, so with
+[composer/installers](https://github.com/composer/installers) present in the
+consuming project it lands in `wp-content/plugins/` rather than in `vendor/`.
+That one is the project's to declare, not this package's to pull in: requiring
+it here would put a Composer *plugin* into the tree.
+
 Then visit `Settings → AI Visibility`.
 
 [releases]: https://github.com/Pollora/AiVisibility/releases/latest

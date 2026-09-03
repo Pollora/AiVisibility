@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AmphiBee AI Visibility
  * Description: Maximize site visibility for AI engines — llms.txt, Markdown endpoints, robots.txt AI directives, AI discovery files, and MCP abilities.
- * Version: 1.3.1
+ * Version: 1.3.2
  * Author: AmphiBee
  * Author URI: https://amphibee.fr
  * Requires PHP: 8.3
@@ -18,14 +18,37 @@ namespace Pollora\AiVisibility;
 
 defined('ABSPATH') || exit;
 
-const VERSION = '1.3.1';
+const VERSION = '1.3.2';
 const PLUGIN_FILE = __FILE__;
 const PLUGIN_DIR = __DIR__;
 const OPTION_KEY = 'ai_visibility_settings';
 const UPLOAD_DIR = 'ai-visibility';
 const CRON_HOOK = 'ai_visibility_regenerate';
 
-require_once __DIR__ . '/vendor/autoload.php';
+// Only the release zip carries a vendor/ directory. A Composer install has
+// none, and does not need one: the package's PSR-4 mapping is already in the
+// consuming project's autoloader. Requiring the file unconditionally made
+// every Composer install fatal the moment it was activated.
+if (is_readable(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
+
+// Neither source produced the classes — a zip built without its dependencies,
+// or a project whose autoloader is not loaded. Say so where someone can read
+// it instead of fataling on the next line.
+if (!class_exists(Plugin::class)) {
+    add_action('admin_notices', static function (): void {
+        printf(
+            '<div class="notice notice-error"><p>%s</p></div>',
+            esc_html__(
+                'AI Visibility cannot find its classes. Install the plugin with Composer, or from a release zip.',
+                'amphibee-ai-visibility',
+            ),
+        );
+    });
+
+    return;
+}
 
 add_action('plugins_loaded', static function (): void {
     (new Plugin())->boot();

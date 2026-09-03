@@ -4,7 +4,7 @@ Tags: llms-txt, ai, markdown, seo, robots-txt
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -171,6 +171,10 @@ that keep a plugin like this one out of your error log.
 
 == Changelog ==
 
+= 1.3.2 =
+
+* Fixed: activating the plugin after a Composer install ended in a fatal error, because the bootstrap required a vendor/autoload.php that only the release zip carries. Installing from the zip was never affected.
+
 = 1.3.1 =
 
 * Fixed: `Tested up to` named WordPress 7.0 when 7.1 had shipped, which keeps a plugin out of directory search results.
@@ -209,6 +213,9 @@ that keep a plugin like this one out of your error log.
 * Description and noindex detection for The SEO Framework, Yoast SEO, Rank Math and SEOPress.
 
 == Upgrade Notice ==
+
+= 1.3.2 =
+Fixes a fatal error on activation for sites that installed the plugin with Composer.
 
 = 1.3.1 =
 Metadata and hardening only. Nothing to do after updating.

@@ -5,6 +5,18 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.3.2
+
+### Fixed
+
+- **Activating the plugin after a Composer install fataled the site.** The
+  bootstrap required `vendor/autoload.php` unconditionally, and that directory
+  exists only in the release zip: installed as a Composer package the file is
+  absent, so activation ended in a fatal error and the site answered 500. The
+  autoloader is now required only when it is there — a Composer install already
+  has the package's PSR-4 mapping in the consuming project's autoloader. If
+  neither source produced the classes the dashboard says so instead of fataling.
+
 ## 1.3.1
 
 ### Fixed

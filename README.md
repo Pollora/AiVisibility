@@ -1,17 +1,42 @@
-# AI Visibility
+<p align="center">
+  <a href="https://pollora.dev">
+    <img src="https://raw.githubusercontent.com/Pollora/.github/main/brand/banners/AiVisibility.png" width="100%" alt="AI Visibility: make a WordPress site legible to AI engines">
+  </a>
+</p>
 
-Makes a WordPress site legible to AI engines — LLMs, AI search, and AI agents.
+<p align="center">
+  <a href="https://packagist.org/packages/pollora/ai-visibility"><img src="https://img.shields.io/packagist/v/pollora/ai-visibility" alt="Latest Stable Version"></a>
+  <a href="https://packagist.org/packages/pollora/ai-visibility"><img src="https://img.shields.io/packagist/dt/pollora/ai-visibility" alt="Total Downloads"></a>
+  <a href="https://github.com/Pollora/AiVisibility/actions/workflows/ci.yml"><img src="https://github.com/Pollora/AiVisibility/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/Pollora/AiVisibility" alt="License"></a>
+</p>
 
-The site already publishes HTML for browsers and a sitemap for search crawlers.
-This plugin adds the formats the newer readers actually want: a structured index
-at `/llms.txt`, a Markdown twin of every page, explicit crawler permissions in
-`robots.txt`, and machine-readable identity files under `/.well-known/`.
+AI Visibility is a WordPress plugin that makes a site legible to AI engines: LLMs, AI search and AI agents. The site already publishes HTML for browsers and a sitemap for search crawlers; this plugin adds the formats the newer readers want: a structured index at `/llms.txt`, a Markdown twin of every page, explicit crawler permissions in `robots.txt`, and machine-readable identity files under `/.well-known/`.
 
-[![CI](https://github.com/Pollora/AiVisibility/actions/workflows/ci.yml/badge.svg)](https://github.com/Pollora/AiVisibility/actions/workflows/ci.yml)
-[![End-to-end](https://github.com/Pollora/AiVisibility/actions/workflows/e2e.yml/badge.svg)](https://github.com/Pollora/AiVisibility/actions/workflows/e2e.yml)
-[![Security](https://github.com/Pollora/AiVisibility/actions/workflows/security.yml/badge.svg)](https://github.com/Pollora/AiVisibility/actions/workflows/security.yml)
+## Installation
 
----
+Download the zip from [the latest release][releases] and install it through
+`Plugins → Add New → Upload Plugin`, or with Composer:
+
+```bash
+composer require pollora/ai-visibility
+```
+
+The package declares `"type": "wordpress-plugin"`, so with
+[composer/installers](https://github.com/composer/installers) present in the
+consuming project it lands in `wp-content/plugins/` rather than in `vendor/`.
+That one is the project's to declare, not this package's to pull in: requiring
+it here would put a Composer *plugin* into the tree.
+
+Then visit `Settings → AI Visibility`.
+
+### Requirements
+
+- PHP 8.3 or newer
+- WordPress 6.7 or newer
+- Pretty permalinks (`Settings → Permalinks`, anything but "Plain")
+
+[releases]: https://github.com/Pollora/AiVisibility/releases/latest
 
 ## What it publishes
 
@@ -46,31 +71,6 @@ Content that is not public stays that way. Password-protected posts, drafts and
 anything an SEO plugin has marked `noindex` are excluded from `llms.txt` and
 `llms-full.txt`, answer `404` at their `.md` URL, and are not advertised as
 having a Markdown alternate.
-
-## Requirements
-
-- PHP 8.3 or newer
-- WordPress 6.7 or newer
-- Pretty permalinks (`Settings → Permalinks`, anything but "Plain")
-
-## Installation
-
-Download the zip from [the latest release][releases] and install it through
-`Plugins → Add New → Upload Plugin`, or with Composer:
-
-```bash
-composer require pollora/ai-visibility
-```
-
-The package declares `"type": "wordpress-plugin"`, so with
-[composer/installers](https://github.com/composer/installers) present in the
-consuming project it lands in `wp-content/plugins/` rather than in `vendor/`.
-That one is the project's to declare, not this package's to pull in: requiring
-it here would put a Composer *plugin* into the tree.
-
-Then visit `Settings → AI Visibility`.
-
-[releases]: https://github.com/Pollora/AiVisibility/releases/latest
 
 ## Languages
 
@@ -164,6 +164,10 @@ composer format        # apply the code style
 The quality gate is described in [CONTRIBUTING.md](CONTRIBUTING.md). Reporting a
 vulnerability: [SECURITY.md](SECURITY.md).
 
-## Licence
+## Contributing
 
-GPL-2.0-or-later. See [LICENSE](LICENSE).
+Contributions are welcome: see the [contributing guide](CONTRIBUTING.md). Report security issues privately, as described in the [security policy](SECURITY.md).
+
+## License
+
+AI Visibility is open-source software licensed under the [GPL-2.0-or-later](LICENSE). © [RuBee group](https://rubee.group)

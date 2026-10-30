@@ -13,7 +13,7 @@ use Pollora\AiVisibility\Support\FileStore;
  */
 final class LlmsTxtEndpoint
 {
-    public const QUERY_VAR = 'ai_visibility_file';
+    public const string QUERY_VAR = 'ai_visibility_file';
 
     public function registerRewriteRules(): void
     {
@@ -38,7 +38,7 @@ final class LlmsTxtEndpoint
     {
         $artifact = self::resolve(get_query_var(self::QUERY_VAR));
 
-        if ($artifact === null) {
+        if (!$artifact instanceof \Pollora\AiVisibility\Artifact) {
             return;
         }
 

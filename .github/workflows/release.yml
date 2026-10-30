@@ -87,7 +87,7 @@ jobs:
         run: |
           cd build/ai-visibility
           failed=0
-          for forbidden in tests phpunit.xml.dist phpstan.neon.dist phpcs.xml.dist pint.json .github .git composer.lock; do
+          for forbidden in tests phpunit.xml.dist phpstan.neon.dist phpcs.xml.dist pint.json .github .git composer.lock rector.php .harness.json AGENTS.md api-surface.json composer-dependency-analyser.php .claude; do
             if [[ -e "$forbidden" ]]; then
               echo "::error::${forbidden} is present in the build"
               failed=1

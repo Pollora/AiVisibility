@@ -22,9 +22,9 @@ use const Pollora\AiVisibility\VERSION;
  */
 final class SettingsPage
 {
-    public const SLUG = 'ai-visibility';
+    public const string SLUG = 'ai-visibility';
 
-    private const NONCE_ACTION = 'ai_visibility_regenerate';
+    private const string NONCE_ACTION = 'ai_visibility_regenerate';
 
     /**
      * The panels, in navigation order.

@@ -30,9 +30,9 @@ use Pollora\AiVisibility\RobotsTxt\AiDirectives;
 final class Plugin
 {
     /** Bounds for posts_per_type, enforced on read as well as on save. */
-    public const MIN_POSTS_PER_TYPE = 1;
+    public const int MIN_POSTS_PER_TYPE = 1;
 
-    public const MAX_POSTS_PER_TYPE = 200;
+    public const int MAX_POSTS_PER_TYPE = 200;
 
     public function boot(): void
     {

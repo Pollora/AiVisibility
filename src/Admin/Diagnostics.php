@@ -19,11 +19,11 @@ use Pollora\AiVisibility\Support\FileStore;
  */
 final class Diagnostics
 {
-    public const PASS = 'pass';
+    public const string PASS = 'pass';
 
-    public const WARN = 'warn';
+    public const string WARN = 'warn';
 
-    public const FAIL = 'fail';
+    public const string FAIL = 'fail';
 
     /**
      * @return list<array{id: string, status: self::*, label: string, detail: string}>

@@ -15,7 +15,7 @@ use Pollora\AiVisibility\Support\FileStore;
  */
 final class DiscoveryFilesEndpoint
 {
-    public const QUERY_VAR = 'ai_visibility_discovery';
+    public const string QUERY_VAR = 'ai_visibility_discovery';
 
     public function registerRewriteRules(): void
     {
@@ -54,7 +54,7 @@ final class DiscoveryFilesEndpoint
 
         $artifact = Artifact::fromSlug($queryVar);
 
-        if ($artifact === null || !in_array($artifact, [Artifact::AiTxt, Artifact::IdentityJson], true)) {
+        if (!$artifact instanceof \Pollora\AiVisibility\Artifact || !in_array($artifact, [Artifact::AiTxt, Artifact::IdentityJson], true)) {
             return;
         }
 

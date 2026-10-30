@@ -19,9 +19,9 @@ use Pollora\AiVisibility\Support\Filters;
  */
 final class MarkdownEndpoint
 {
-    private const CACHE_TTL = DAY_IN_SECONDS;
+    private const int CACHE_TTL = DAY_IN_SECONDS;
 
-    private const CACHE_PREFIX = 'ai_vis_md_';
+    private const string CACHE_PREFIX = 'ai_vis_md_';
 
     public function registerQueryVars(): void
     {
@@ -148,7 +148,7 @@ final class MarkdownEndpoint
         // Try to find the post by slug
         $post = $this->findPostByPath($path);
 
-        if (!$post) {
+        if (!$post instanceof \WP_Post) {
             status_header(404);
             exit;
         }

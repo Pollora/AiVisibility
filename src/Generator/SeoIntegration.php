@@ -76,16 +76,13 @@ final class SeoIntegration
         if (is_array($rankmath) && in_array('noindex', $rankmath, true)) {
             return true;
         }
+
         if (is_string($rankmath) && str_contains($rankmath, 'noindex')) {
             return true;
         }
 
         // SEOPress
         $seopress = get_post_meta($postId, '_seopress_robots_index', true);
-        if ($seopress === 'yes') {
-            return true;
-        }
-
-        return false;
+        return $seopress === 'yes';
     }
 }

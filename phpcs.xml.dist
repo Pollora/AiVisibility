@@ -15,6 +15,10 @@
          also trips PHPCompatibility's "$this outside a class" heuristic on every
          single test. They are covered by parallel-lint, Pint and the CI matrix. -->
     <exclude-pattern>*/tests/*</exclude-pattern>
+    <!-- Tooling configuration, not shipped and not run inside WordPress: their top-level
+         variables are not plugin globals. -->
+    <exclude-pattern>*/rector.php</exclude-pattern>
+    <exclude-pattern>*/composer-dependency-analyser.php</exclude-pattern>
     <exclude-pattern>*/build/*</exclude-pattern>
     <exclude-pattern>*/node_modules/*</exclude-pattern>
 

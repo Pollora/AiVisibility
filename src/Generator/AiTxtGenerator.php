@@ -40,6 +40,7 @@ final class AiTxtGenerator
         if ($allowed !== []) {
             $lines[] = 'Policy: allow-ai-search';
         }
+
         if ($blocked !== []) {
             $lines[] = 'Policy: disallow-ai-training';
         }

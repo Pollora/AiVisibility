@@ -19,7 +19,7 @@ final class Invalidation
     /**
      * Seconds to wait before regenerating, so a burst of saves costs one pass.
      */
-    public const DEBOUNCE = 60;
+    public const int DEBOUNCE = 60;
 
     /**
      * Schedule a debounced regeneration after a post changed.

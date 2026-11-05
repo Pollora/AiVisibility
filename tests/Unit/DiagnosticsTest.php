@@ -112,6 +112,12 @@ describe('files', function (): void {
 });
 
 describe('abilities', function (): void {
+    it('passes when WordPress provides the Abilities API', function (): void {
+        Functions\when('wp_register_ability')->justReturn(null);
+
+        expect(check('abilities')['status'])->toBe(Diagnostics::PASS);
+    });
+
     it('warns rather than fails when the Abilities API is absent', function (): void {
         // Everything except MCP works without it, so this is never a failure.
         expect(check('abilities')['status'])->toBeIn([Diagnostics::PASS, Diagnostics::WARN]);

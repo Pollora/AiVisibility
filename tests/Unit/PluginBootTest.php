@@ -52,6 +52,19 @@ describe('feature flags', function (): void {
             ->toBe($enabled);
     })->with([true, false]);
 
+    it('registers abilities when the feature is on and WordPress provides the API', function (): void {
+        // Defined here rather than relied upon: another test may or may not have
+        // declared it already, and the outcome must not depend on test order.
+        Functions\when('wp_register_ability')->justReturn(null);
+
+        ($this->boot)(['enable_abilities' => true]);
+
+        expect(has_action('wp_abilities_api_init', 'Pollora\AiVisibility\Abilities\Registration->registerAbilities()'))
+            ->not->toBeFalse()
+            ->and(has_action('wp_abilities_api_categories_init', 'Pollora\AiVisibility\Abilities\Registration->registerCategories()'))
+            ->not->toBeFalse();
+    });
+
     it('does not register abilities when the feature is switched off', function (): void {
         ($this->boot)(['enable_abilities' => false]);
 

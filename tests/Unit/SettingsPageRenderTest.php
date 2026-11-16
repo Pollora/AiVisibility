@@ -52,7 +52,8 @@ beforeEach(function (): void {
     ]);
     Functions\when('wp_count_posts')->justReturn((object) ['publish' => 4]);
     Functions\when('number_format_i18n')->alias(static fn ($n) => (string) $n);
-    Functions\when('_n')->alias(static fn ($single, $plural, $count) => $count === 1 ? $single : $plural);
+    // Typed like the real thing, so a count that was not cast to int is an error.
+    Functions\when('_n')->alias(static fn (string $single, string $plural, int $count) => $count === 1 ? $single : $plural);
     Functions\when('wp_register_ability')->justReturn(null);
 
     $this->markup = function (string $tab = ''): string {

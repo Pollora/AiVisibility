@@ -140,11 +140,11 @@ describe('exact conversion', function (): void {
     });
 
     it('trims nothing but the line ends, and keeps indentation inside text', function (): void {
-        expect($this->converter->convert("<p>  indented</p>"))->toBe('indented');
+        expect($this->converter->convert('<p>  indented</p>'))->toBe('indented');
     });
 
     it('keeps a hard line break as exactly two trailing spaces', function (): void {
-        $markdown = $this->converter->convert("<p>a<br>b</p><p>c<br>   <br>d</p>");
+        $markdown = $this->converter->convert('<p>a<br>b</p><p>c<br>   <br>d</p>');
 
         expect($markdown)->toBe("a  \nb\n\nc  \n\nd");
     });

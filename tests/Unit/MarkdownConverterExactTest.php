@@ -181,8 +181,8 @@ describe('exact conversion', function (): void {
         'heading' => ['a<h2>b</h2>c', "a\n\n## b\n\nc"],
         'blockquote' => ['a<blockquote>b</blockquote>c', "a\n\n> b\n\nc"],
         'table' => ['a<table><tr><td>b</td></tr></table>c', "a\n\n| b |\n| --- |\n\nc"],
-        'unordered list' => ['a<ul><li>b</li></ul>c', "a\n\n- b\n\nc"],
-        'ordered list' => ['a<ol><li>b</li></ol>c', "a\n\n1. b\n\nc"],
+        'unordered list' => ['a<ul><li>b</li></ul>c', "a\n\n- b\nc"],
+        'ordered list' => ['a<ol><li>b</li></ol>c', "a\n\n1. b\nc"],
         'two lists' => ['<ul><li>a</li></ul><ol><li>b</li></ol>', "- a\n\n1. b"],
     ]);
 });

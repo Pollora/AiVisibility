@@ -76,6 +76,11 @@ final class Plugin
             add_action('admin_menu', [$settingsPage, 'register']);
             add_action('admin_init', [$settingsPage, 'registerSettings']);
             add_action('admin_enqueue_scripts', [$settingsPage, 'enqueueAssets']);
+            // handleRegenerate() checks current_user_can('manage_options') then
+            // check_ajax_referer(SettingsPage::NONCE_ACTION) before acting. Not
+            // declared through pollora/ajax: this plugin is standalone and has no
+            // dependency on the Pollora framework.
+            // nosemgrep: pollora.sec-02.manual-ajax-hook
             add_action('wp_ajax_ai_visibility_regenerate', [$settingsPage, 'handleRegenerate']);
         }
 

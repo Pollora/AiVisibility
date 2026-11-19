@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "12b289735c976c5c3c1ef86c28cebbdb",
+    "content-hash": "179c6d7dac76516b03ae28ce4070b4a2",
     "packages": [],
     "packages-dev": [
         {
@@ -2889,16 +2889,16 @@
         },
         {
             "name": "pollora/harness",
-            "version": "v0.1.30",
+            "version": "v0.1.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Pollora/harness.git",
-                "reference": "3d8ab6d26582a0e7a85f5c9f64b56f080b55e61f"
+                "reference": "e570657f6f2efb1b34ee1c49242ac25e9da2da76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Pollora/harness/zipball/3d8ab6d26582a0e7a85f5c9f64b56f080b55e61f",
-                "reference": "3d8ab6d26582a0e7a85f5c9f64b56f080b55e61f",
+                "url": "https://api.github.com/repos/Pollora/harness/zipball/e570657f6f2efb1b34ee1c49242ac25e9da2da76",
+                "reference": "e570657f6f2efb1b34ee1c49242ac25e9da2da76",
                 "shasum": ""
             },
             "require": {
@@ -2953,10 +2953,10 @@
             ],
             "support": {
                 "issues": "https://github.com/Pollora/harness/issues",
-                "source": "https://github.com/Pollora/harness/tree/v0.1.30"
+                "source": "https://github.com/Pollora/harness/tree/v0.1.31"
             },
-            "time": "2026-11-18T10:33:07+00:00",
-            "published-time": "2026-11-18T10:34:24+00:00"
+            "time": "2026-11-19T08:06:19+00:00",
+            "published-time": "2026-11-19T08:08:38+00:00"
         },
         {
             "name": "psr/container",
